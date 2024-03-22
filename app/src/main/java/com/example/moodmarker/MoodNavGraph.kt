@@ -14,29 +14,22 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun MarkMyMood(navController: NavHostController = rememberNavController()) {
+fun MoodNavGraph(navController: NavHostController = rememberNavController()) {
     NavHost(navController = navController, startDestination = Routes.MainPage.route){
         composable(Routes.MainPage.route){
-            Row {
-
-            }
-            Row () {
-                Text("😐", fontSize = 18.em)
-                Text("🙂", fontSize = 18.em)
-            }
-            Row {
-                Text("😡", fontSize = 18.em)
-                Text("🙁", fontSize = 18.em)
-                Text("😁", fontSize = 18.em)
-            }
-            Row (modifier = Modifier.padding(50.dp)){
-                Button(onClick = { navController.navigate(Routes.AddMoodMarker.route) }) {
-                    Text("Mark My Mood!", fontSize = 7.em, modifier = Modifier.padding(10.dp))
-                }
-            }
-            Row {
-
-            }
+            MarkMyMood()
+        }
+        composable(Routes.AddMoodMarker.route){
+            /* TODO: AddMoodMarker */
+        }
+        composable(Routes.FavMoodMarkers.route){
+            /* TODO: FavMoodMarkers */
+        }
+        composable(Routes.PastMoodMarkers.route){
+            /* TODO: PastMoodMarkers */
+        }
+        composable(Routes.Settings.route){
+            /* TODO: Settings */
         }
     }
 
