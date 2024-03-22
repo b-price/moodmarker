@@ -17,10 +17,10 @@ import androidx.navigation.compose.rememberNavController
 fun MoodNavGraph(navController: NavHostController = rememberNavController()) {
     NavHost(navController = navController, startDestination = Routes.MainPage.route){
         composable(Routes.MainPage.route){
-            MarkMyMood()
+            MarkMyMood(navController)
         }
         composable(Routes.AddMoodMarker.route){
-            /* TODO: AddMoodMarker */
+            MoodCard(navController)
         }
         composable(Routes.FavMoodMarkers.route){
             /* TODO: FavMoodMarkers */

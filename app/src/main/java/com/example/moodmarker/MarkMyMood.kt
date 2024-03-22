@@ -14,9 +14,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
+import androidx.navigation.NavHostController
 
 @Composable
-fun MarkMyMood() {
+fun MarkMyMood(nav: NavHostController) {
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
@@ -25,26 +26,34 @@ fun MarkMyMood() {
             Spacer(modifier = Modifier.height(150.dp))
         }
         Row () {
-            Text("😐", fontSize = 18.em, modifier = Modifier.clickable {
-                /* TODO: Navigation to AddMoodMarker with preset mood */
-            })
+            Text("😐",
+                fontSize = 18.em,
+                modifier = Modifier.clickable {
+                    nav.navigate(Routes.AddMoodMarker.route)
+                    /* TODO: Navigation to AddMoodMarker with preset mood */
+                }
+            )
             Text("🙂", fontSize = 18.em, modifier = Modifier.clickable {
+                nav.navigate(Routes.AddMoodMarker.route)
                 /* TODO: Navigation to AddMoodMarker with preset mood */
             })
         }
         Row {
             Text("😡", fontSize = 18.em, modifier = Modifier.clickable {
+                nav.navigate(Routes.AddMoodMarker.route)
                 /* TODO: Navigation to AddMoodMarker with preset mood */
             })
             Text("🙁", fontSize = 18.em, modifier = Modifier.clickable {
+                nav.navigate(Routes.AddMoodMarker.route)
                 /* TODO: Navigation to AddMoodMarker with preset mood */
             })
             Text("😁", fontSize = 18.em, modifier = Modifier.clickable {
+                nav.navigate(Routes.AddMoodMarker.route)
                 /* TODO: Navigation to AddMoodMarker with preset mood */
             })
         }
         Row (modifier = Modifier.padding(50.dp)){
-            Button(onClick = { /*TODO: Navigation to AddMoodMarker*/ }) {
+            Button(onClick = { nav.navigate(Routes.AddMoodMarker.route) }) {
                 Text("Mark My Mood!", fontSize = 7.em, modifier = Modifier.padding(10.dp))
             }
         }
