@@ -1,5 +1,5 @@
 package com.example.moodmarker
-
+/*
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -34,3 +34,6 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController()) {
     }
 
 }
+
+ */
+
