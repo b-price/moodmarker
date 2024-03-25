@@ -6,4 +6,6 @@ sealed class Routes(val route: String) {
     object PastMoodMarkers : Routes("pastMoodMarkers")
     object FavMoodMarkers : Routes("favMoodMarkers")
     object Settings : Routes("settings")
+    object ProfilePage : Routes("profilePage")
+    object AppSettings : Routes("appSetings")
 }

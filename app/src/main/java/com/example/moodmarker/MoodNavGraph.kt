@@ -29,6 +29,13 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController()) {
             /* TODO: PastMoodMarkers */
         }
         composable(Routes.Settings.route){
+            Settings(navController)
+
+        }
+        composable(Routes.ProfilePage.route){
+            ProfilePage(navController)
+        }
+        composable(Routes.AppSettings.route){
             /* TODO: Settings */
         }
     }
