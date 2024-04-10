@@ -21,8 +21,7 @@ import androidx.navigation.NavHostController
 
 @Composable
 fun MoodCard(nav: NavHostController) {
-    val originalMoodMarker = remember { mutableStateOf("") }
-    val selectedEmotion = remember { mutableStateOf(EmotionType.Excited) }
+    val moodMarker = remember { mutableStateOf(MoodMarker(EmotionType.Excited, "")) }
 
     Card(
         shape = RoundedCornerShape(5.dp),
@@ -36,13 +35,13 @@ fun MoodCard(nav: NavHostController) {
         Column(
             modifier = Modifier.fillMaxWidth()
         ) {
-            if (selectedEmotion.value == EmotionType.Angry) {
+            if (moodMarker.value.emotionType == EmotionType.Angry) {
                 Text("\uD83D\uDE21", fontSize = 18.em)
-            } else if (selectedEmotion.value == EmotionType.Sad) {
+            } else if (moodMarker.value.emotionType == EmotionType.Sad) {
                 Text("\uD83D\uDE41", fontSize = 18.em)
-            } else if (selectedEmotion.value == EmotionType.Neutral) {
+            } else if (moodMarker.value.emotionType == EmotionType.Neutral) {
                 Text("\uD83D\uDE10", fontSize = 18.em)
-            } else if (selectedEmotion.value == EmotionType.Happy) {
+            } else if (moodMarker.value.emotionType == EmotionType.Happy) {
                 Text("\uD83D\uDE42", fontSize = 18.em)
             } else {
                 Text("\uD83D\uDE01", fontSize = 18.em)
@@ -59,35 +58,37 @@ fun MoodCard(nav: NavHostController) {
                 Text("\uD83D\uDE01", fontSize = 8.em)
             }
             Row() {
-                RadioButton(selected = selectedEmotion.value == EmotionType.Angry,
+                RadioButton(selected = moodMarker.value.emotionType == EmotionType.Angry,
                     onClick = {
-                        selectedEmotion.value = EmotionType.Angry
+                        moodMarker.value = moodMarker.value.copy(emotionType = EmotionType.Angry)
                     }
                 )
-                RadioButton(selected = selectedEmotion.value == EmotionType.Sad,
+                RadioButton(selected = moodMarker.value.emotionType == EmotionType.Sad,
                     onClick = {
-                        selectedEmotion.value = EmotionType.Sad
+                        moodMarker.value = moodMarker.value.copy(emotionType = EmotionType.Sad)
                     }
                 )
-                RadioButton(selected = selectedEmotion.value == EmotionType.Neutral,
+                RadioButton(selected = moodMarker.value.emotionType == EmotionType.Neutral,
                     onClick = {
-                        selectedEmotion.value = EmotionType.Neutral
+                        moodMarker.value = moodMarker.value.copy(emotionType = EmotionType.Neutral)
                     }
                 )
-                RadioButton(selected = selectedEmotion.value == EmotionType.Happy,
+                RadioButton(selected = moodMarker.value.emotionType == EmotionType.Happy,
                     onClick = {
-                        selectedEmotion.value = EmotionType.Happy
+                        moodMarker.value = moodMarker.value.copy(emotionType = EmotionType.Happy)
                     }
                 )
-                RadioButton(selected = selectedEmotion.value == EmotionType.Excited,
+                RadioButton(selected = moodMarker.value.emotionType == EmotionType.Excited,
                     onClick = {
-                        selectedEmotion.value = EmotionType.Excited
+                        moodMarker.value = moodMarker.value.copy(emotionType = EmotionType.Excited)
                     }
                 )
             }
             TextField(
-                value = originalMoodMarker.value,
-                onValueChange = { originalMoodMarker.value = it },
+                value = moodMarker.value.dailyEntry,
+                onValueChange = {
+                    moodMarker.value = moodMarker.value.copy(dailyEntry = it)
+                                },
                 label = { Text("Enter your MoodMarker") }
             )
         }
