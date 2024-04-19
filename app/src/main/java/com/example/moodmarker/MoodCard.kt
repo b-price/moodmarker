@@ -21,10 +21,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 
 @Composable
-fun MoodCard(nav: NavHostController) {
+fun MoodCard(
+    nav: NavHostController,
+    vm: NewMoodMarkerViewModel = viewModel()
+) {
     val moodMarker = remember { mutableStateOf(MoodMarker(EmotionType.Excited, "")) }
 
     Card(
@@ -42,7 +46,9 @@ fun MoodCard(nav: NavHostController) {
                 Text("Date: ")
                 //Add code so user can enter the date
 
-                Button(onClick = { } ) {
+                Button(onClick = {
+                    vm.addMoodMarker(moodMarker.value)
+                    moodMarker.value = MoodMarker(EmotionType.Excited, "")} ) {
                     Text("Submit")
                 }
             }
@@ -104,7 +110,7 @@ fun MoodCard(nav: NavHostController) {
                 value = moodMarker.value.dailyEntry,
                 onValueChange = {
                     moodMarker.value = moodMarker.value.copy(dailyEntry = it)
-                                },
+                },
                 label = { Text("Enter your MoodMarker") }
             )
         }

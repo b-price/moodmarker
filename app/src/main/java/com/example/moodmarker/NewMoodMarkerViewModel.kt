@@ -10,6 +10,8 @@ class NewMoodMarkerViewModel: ViewModel() {
     val dailyEntry: State<String> = _dailyEntry
     private val _emotionType: MutableState<EmotionType> = mutableStateOf(EmotionType.Excited)
     val emotionType: State<EmotionType> = _emotionType
+    private val _moodMarkers: MutableState<List<MoodMarker>> = mutableStateOf(emptyList())
+    val moodMarkers: State<List<MoodMarker>> = _moodMarkers
 
     fun setDailyEntry(dailyEntry: String) {
         _dailyEntry.value = dailyEntry
@@ -17,5 +19,9 @@ class NewMoodMarkerViewModel: ViewModel() {
 
     fun setEmotionType(emotionType: EmotionType) {
         _emotionType.value = emotionType
+    }
+
+    fun addMoodMarker(moodMarker: MoodMarker) {
+        _moodMarkers.value = _moodMarkers.value + moodMarker
     }
 }
