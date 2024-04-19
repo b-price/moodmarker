@@ -23,7 +23,7 @@ fun MarkMyMood(nav: NavHostController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row {
-            Spacer(modifier = Modifier.height(150.dp))
+            Spacer(modifier = Modifier.height(50.dp))
         }
         Row () {
             Text("😐",

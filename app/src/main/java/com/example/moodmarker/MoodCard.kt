@@ -23,13 +23,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import java.util.Date
 
 @Composable
 fun MoodCard(
     nav: NavHostController,
     vm: NewMoodMarkerViewModel = viewModel()
 ) {
-    val moodMarker = remember { mutableStateOf(MoodMarker(EmotionType.Excited, "")) }
+    val moodMarker = remember { mutableStateOf(MoodMarker(0,EmotionType.Excited, "", false, Date())) }
 
     Card(
         shape = RoundedCornerShape(5.dp),
@@ -48,7 +49,7 @@ fun MoodCard(
 
                 Button(onClick = {
                     vm.addMoodMarker(moodMarker.value)
-                    moodMarker.value = MoodMarker(EmotionType.Excited, "")} ) {
+                    moodMarker.value = MoodMarker(0, EmotionType.Excited, "", false, Date())} ) {
                     Text("Submit")
                 }
             }

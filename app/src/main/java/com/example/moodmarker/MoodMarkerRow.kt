@@ -1,12 +1,18 @@
 package com.example.moodmarker
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -14,10 +20,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.PointerIcon.Companion.Text
 import androidx.compose.ui.unit.em
+import java.text.DateFormat
 
 @Composable
 fun MoodMarkerRow(
-    moodMarker: MoodMarker
+    moodMarker: MoodMarker,
+    onPrepareDelete: (MoodMarker) -> Unit
 ){
     Card(
         shape = RoundedCornerShape(5.dp),
@@ -30,6 +38,22 @@ fun MoodMarkerRow(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            Column {
+                Text(moodMarker.date.toString())
+            }
+            Column {
+                if (moodMarker.isFavorite){
+                    Icon(Icons.Default.Favorite, "Favorite")
+                }
+            }
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(14.dp),
             verticalAlignment = Alignment.CenterVertically
 
         ) {
@@ -40,13 +64,23 @@ fun MoodMarkerRow(
                     EmotionType.Neutral -> "😐"
                     EmotionType.Happy -> "😊"
                     EmotionType.Excited -> "😁"
-
                 },
-                fontSize = 18.em
+                fontSize = 15.em
             )
             Spacer(modifier = Modifier.width(16.dp))
-            Text(text = moodMarker.dailyEntry)
+            Text(text = moodMarker.dailyEntry.slice(0..70) + "...")
 
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ){
+            Button(onClick = { onPrepareDelete(moodMarker) }) {
+                Text("Delete Entry")
+            }
         }
     }
 }
