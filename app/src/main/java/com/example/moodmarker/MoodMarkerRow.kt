@@ -68,7 +68,8 @@ fun MoodMarkerRow(
                 fontSize = 15.em
             )
             Spacer(modifier = Modifier.width(16.dp))
-            Text(text = moodMarker.dailyEntry.slice(0..70) + "...")
+            Text(text = moodMarker.dailyEntry)
+          //  Text(text = moodMarker.dailyEntry.slice(0..70) + "...")
 
         }
         Row(

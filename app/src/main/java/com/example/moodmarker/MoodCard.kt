@@ -1,5 +1,6 @@
 package com.example.moodmarker
 
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,6 +20,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -28,7 +30,7 @@ import java.util.Date
 @Composable
 fun MoodCard(
     nav: NavHostController,
-    vm: NewMoodMarkerViewModel = viewModel()
+    vm: EntriesViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
 ) {
     val moodMarker = remember { mutableStateOf(MoodMarker(0,EmotionType.Excited, "", false, Date())) }
 
@@ -44,12 +46,12 @@ fun MoodCard(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text("Date: ")
-                //Add code so user can enter the date
 
                 Button(onClick = {
                     vm.addMoodMarker(moodMarker.value)
-                    moodMarker.value = MoodMarker(0, EmotionType.Excited, "", false, Date())} ) {
+                    nav.popBackStack()
+                    })
+                     {
                     Text("Submit")
                 }
             }
