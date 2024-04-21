@@ -49,4 +49,8 @@ class EntriesViewModel: ViewModel() {
         _entryToBeDeleted = entry
         _showDialog.value = true
     }
+
+    fun getFavorites(): List<MoodMarker>{
+        return _repository.getFavorites()
+    }
 }

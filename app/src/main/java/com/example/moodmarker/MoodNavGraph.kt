@@ -27,7 +27,14 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
             MoodCard(navController)
         }
         composable(Routes.Favorites.route){
-            /* TODO: FavMoodMarkers */
+            val vm: EntriesViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
+            val showDialog by vm.showDialog
+            Entries(
+                entries = vm.getFavorites(),
+                showDialog = showDialog,
+                onDelete = vm::deleteMoodMarker,
+                onPrepareDelete = vm::prepareDelete,
+                dismissDialog = vm::dismissDialog)
         }
         composable(Routes.Entries.route){
             val vm: EntriesViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
@@ -42,7 +49,6 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
         }
         composable(Routes.Settings.route){
             Settings(navController)
-
         }
         composable(Routes.ProfilePage.route){
             ProfilePage(navController)
