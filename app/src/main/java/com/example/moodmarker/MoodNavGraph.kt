@@ -9,9 +9,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 
 @Composable
 fun MoodNavGraph(navController: NavHostController = rememberNavController(), paddingValues: PaddingValues) {
@@ -23,8 +25,11 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
         composable(Routes.MainPage.route){
             MarkMyMood(navController)
         }
-        composable(Routes.AddMoodMarker.route){
-            MoodCard(navController)
+        composable(
+            Routes.AddMoodMarker.route + "/{presetMood}",
+            arguments = listOf(navArgument("presetMood") { type = NavType.StringType }
+            )){ backStackEntry ->
+            MoodCard(navController, presetMood = backStackEntry.arguments?.getString("presetMood"))
         }
         composable(Routes.Favorites.route){
             val vm: EntriesViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)

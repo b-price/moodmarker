@@ -29,31 +29,26 @@ fun MarkMyMood(nav: NavHostController) {
             Text("😐",
                 fontSize = 18.em,
                 modifier = Modifier.clickable {
-                    nav.navigate(Routes.AddMoodMarker.route)
-                    /* TODO: Navigation to AddMoodMarker with preset mood */
+                    nav.navigate(Routes.AddMoodMarker.route + "/Neutral")
                 }
             )
             Text("🙂", fontSize = 18.em, modifier = Modifier.clickable {
-                nav.navigate(Routes.AddMoodMarker.route)
-                /* TODO: Navigation to AddMoodMarker with preset mood */
+                nav.navigate(Routes.AddMoodMarker.route + "/Happy")
             })
         }
         Row {
             Text("😡", fontSize = 18.em, modifier = Modifier.clickable {
-                nav.navigate(Routes.AddMoodMarker.route)
-                /* TODO: Navigation to AddMoodMarker with preset mood */
+                nav.navigate(Routes.AddMoodMarker.route + "/Angry")
             })
             Text("🙁", fontSize = 18.em, modifier = Modifier.clickable {
-                nav.navigate(Routes.AddMoodMarker.route)
-                /* TODO: Navigation to AddMoodMarker with preset mood */
+                nav.navigate(Routes.AddMoodMarker.route + "/Sad")
             })
             Text("😁", fontSize = 18.em, modifier = Modifier.clickable {
-                nav.navigate(Routes.AddMoodMarker.route)
-                /* TODO: Navigation to AddMoodMarker with preset mood */
+                nav.navigate(Routes.AddMoodMarker.route + "/Excited")
             })
         }
         Row (modifier = Modifier.padding(50.dp)){
-            Button(onClick = { nav.navigate(Routes.AddMoodMarker.route) }) {
+            Button(onClick = { nav.navigate(Routes.AddMoodMarker.route + "/Happy") }) {
                 Text("Mark My Mood!", fontSize = 7.em, modifier = Modifier.padding(10.dp))
             }
         }

@@ -30,9 +30,17 @@ import java.util.Date
 @Composable
 fun MoodCard(
     nav: NavHostController,
-    vm: EntriesViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
+    vm: EntriesViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity),
+    presetMood: String? = "Happy"
 ) {
-    val moodMarker = remember { mutableStateOf(MoodMarker(0,EmotionType.Excited, "", false, Date())) }
+    val mood = when (presetMood) {
+        "Angry" -> EmotionType.Angry
+        "Neutral" -> EmotionType.Neutral
+        "Sad" -> EmotionType.Sad
+        "Excited" -> EmotionType.Excited
+        else -> EmotionType.Happy
+    }
+    val moodMarker = remember { mutableStateOf(MoodMarker(0, mood, "", false, Date())) }
 
     Card(
         shape = RoundedCornerShape(5.dp),
