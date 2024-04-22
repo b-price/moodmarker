@@ -21,18 +21,24 @@ fun Settings(nav: NavHostController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row {
-            Spacer(modifier = Modifier.height(150.dp))
+            Spacer(modifier = Modifier.height(75.dp))
         }
 
-        Row (modifier = Modifier.padding(50.dp)){
+        Row (modifier = Modifier.padding(50.dp), verticalAlignment = Alignment.CenterVertically){
             Button(onClick = { nav.navigate(Routes.ProfilePage.route) }) {
                 Text("Profile Settings", fontSize = 7.em, modifier = Modifier.padding(10.dp))
             }
         }
 
-        Row (modifier = Modifier.padding(50.dp)){
+        Row (modifier = Modifier.padding(50.dp), verticalAlignment = Alignment.CenterVertically){
             Button(onClick = { nav.navigate(Routes.AppSettings.route) }) {
                 Text("App Settings", fontSize = 7.em, modifier = Modifier.padding(10.dp))
+            }
+        }
+
+        Row (modifier = Modifier.padding(50.dp), verticalAlignment = Alignment.CenterVertically){
+            Button(onClick = { nav.navigate(Routes.LoginPage.route) }) {
+                Text("Logout", fontSize = 7.em, modifier = Modifier.padding(10.dp))
             }
         }
 

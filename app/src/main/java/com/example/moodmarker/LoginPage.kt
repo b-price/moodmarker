@@ -25,9 +25,9 @@ fun LoginPage(nav: NavHostController) {
     val userName = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
 
-    val emojiList = listOf("😁", "😡", "🙁", "🙂", "😐")
-    val randomEmojiOne = emojiList.shuffled().take(1)[0]
-    val randomEmojiTwo = emojiList.shuffled().take(1)[0]
+//    val emojiList = listOf("😁", "😡", "🙁", "🙂", "😐")
+//    val randomEmojiOne = emojiList.shuffled().take(1)[0]
+//    val randomEmojiTwo = emojiList.shuffled().take(1)[0]
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally

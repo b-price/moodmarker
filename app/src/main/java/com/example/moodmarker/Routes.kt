@@ -8,6 +8,6 @@ sealed class Routes(val route: String) {
     object Settings : Routes("settings")
     object ProfilePage : Routes("profilePage")
     object AppSettings : Routes("appSettings")
-    object Login : Routes("loginPage")
+    object LoginPage : Routes("loginPage")
     object CreateAccount : Routes("createAccount")
 }
