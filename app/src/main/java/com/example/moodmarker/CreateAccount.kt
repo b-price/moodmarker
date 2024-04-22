@@ -70,10 +70,10 @@ fun CreateAccount(nav: NavHostController) {
 
         Row (modifier = Modifier.padding(50.dp), verticalAlignment = Alignment.CenterVertically){
             Button(onClick = { nav.navigate(Routes.MainPage.route) }, modifier = Modifier.padding(10.dp) ) {
-                Text("Submit", fontSize = 5.em, modifier = Modifier.padding(10.dp))
+                Text("Submit", fontSize = 5.em, modifier = Modifier.padding(8.dp))
             }
             Button(onClick = { nav.navigate(Routes.LoginPage.route) }) {
-                Text("Cancel", fontSize = 5.em, modifier = Modifier.padding(10.dp))
+                Text("Cancel", fontSize = 5.em, modifier = Modifier.padding(8.dp))
             }
         }
 

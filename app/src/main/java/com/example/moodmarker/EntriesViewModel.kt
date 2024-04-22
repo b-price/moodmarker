@@ -34,17 +34,11 @@ class EntriesViewModel: ViewModel() {
         dismissDialog()
     }
 
-    /**
-     * Clears the cached song and dismisses the dialog.
-     */
     fun dismissDialog() {
         _entryToBeDeleted = null
         _showDialog.value = false
     }
 
-    /**
-     * Caches the song to be deleted and shows the dialog
-     */
     fun prepareDelete(entry: MoodMarker) {
         _entryToBeDeleted = entry
         _showDialog.value = true
