@@ -2,6 +2,9 @@ package com.example.moodmarker
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Favorite
@@ -16,7 +19,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -38,12 +44,29 @@ fun MainScreen() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun TopBar() {
+
+    val emojiList = listOf("😁", "😡", "🙁", "🙂", "😐")
+    val randomEmojiOne = emojiList.shuffled().take(1)[0]
+    val randomEmojiTwo = emojiList.shuffled().take(1)[0]
+
     TopAppBar(title = {
-        Text(
-            "MoodMarker",
-            fontSize = 9.em,
-            fontWeight = FontWeight.Bold
-        )
+//        Text(
+//            "MoodMarker",
+//            fontSize = 9.em,
+//            fontWeight = FontWeight.Bold
+//        )
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 6.dp, end = 6.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ){
+            Text(text = "M", fontSize = 12.em, fontWeight = FontWeight.Bold)
+            Text(text = randomEmojiOne, fontSize = 7.em)
+            Text(text = randomEmojiTwo, fontSize = 7.em)
+            Text(text = "d  ", fontSize = 12.em, fontWeight = FontWeight.Bold)
+            Text(text = "Marker", fontSize = 12.em, fontWeight = FontWeight.Bold)
+        }
+
     })
 }
 

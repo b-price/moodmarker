@@ -22,16 +22,38 @@ import androidx.navigation.NavHostController
 @Composable
 fun LoginPage(nav: NavHostController) {
 
-
     val userName = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
+
+    val emojiList = listOf("😁", "😡", "🙁", "🙂", "😐")
+    val randomEmojiOne = emojiList.shuffled().take(1)[0]
+    val randomEmojiTwo = emojiList.shuffled().take(1)[0]
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row {
-            Spacer(modifier = Modifier.height(150.dp))
+            Spacer(modifier = Modifier.height(25.dp))
         }
+
+//        Row(
+//            verticalAlignment = Alignment.CenterVertically,
+//        ){
+//            Text(text = "M", fontSize = 18.em)
+//            Text(text = randomEmojiOne, fontSize = 10.em)
+//            Text(text = randomEmojiTwo, fontSize = 10.em)
+//            Text(text = "d", fontSize = 18.em)
+//        }
+//        Row(
+//            verticalAlignment = Alignment.CenterVertically,
+//        ){
+//            Text(text = "Marker", fontSize = 18.em)
+//        }
+
+        Row {
+            Spacer(modifier = Modifier.height(50.dp))
+        }
+
 
         Row(modifier = Modifier
             .fillMaxWidth()
