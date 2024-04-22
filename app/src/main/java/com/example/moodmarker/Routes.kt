@@ -7,5 +7,7 @@ sealed class Routes(val route: String) {
     object Favorites : Routes("favorites")
     object Settings : Routes("settings")
     object ProfilePage : Routes("profilePage")
-    object AppSettings : Routes("appSetings")
+    object AppSettings : Routes("appSettings")
+    object Login : Routes("loginPage")
+    object CreateAccount : Routes("createAccount")
 }

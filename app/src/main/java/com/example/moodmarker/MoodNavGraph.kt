@@ -19,9 +19,15 @@ import androidx.navigation.navArgument
 fun MoodNavGraph(navController: NavHostController = rememberNavController(), paddingValues: PaddingValues) {
     NavHost(
         navController = navController,
-        startDestination = Routes.MainPage.route,
+        startDestination = Routes.Login.route,
         modifier = Modifier.padding(paddingValues)
     ){
+        composable(Routes.Login.route){
+            LoginPage(navController)
+        }
+        composable(Routes.CreateAccount.route){
+            CreateAccount(navController)
+        }
         composable(Routes.MainPage.route){
             MarkMyMood(navController)
         }
