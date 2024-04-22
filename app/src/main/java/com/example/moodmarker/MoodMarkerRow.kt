@@ -60,9 +60,9 @@ fun MoodMarkerRow(
             Text(
                 text = when (moodMarker.emotionType) {
                     EmotionType.Angry -> "😡"
-                    EmotionType.Sad -> "😢"
+                    EmotionType.Sad -> "🙁"
                     EmotionType.Neutral -> "😐"
-                    EmotionType.Happy -> "😊"
+                    EmotionType.Happy -> "🙂"
                     EmotionType.Excited -> "😁"
                 },
                 fontSize = 15.em
