@@ -40,7 +40,8 @@ fun MoodCard(
         "Excited" -> EmotionType.Excited
         else -> EmotionType.Happy
     }
-    val moodMarker = remember { mutableStateOf(MoodMarker(0, mood, "", false, Date())) }
+
+    val moodMarker = remember { mutableStateOf(MoodMarker(0, mood, "", false)) }
 
     Card(
         shape = RoundedCornerShape(5.dp),

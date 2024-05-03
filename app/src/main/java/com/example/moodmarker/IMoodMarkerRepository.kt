@@ -7,5 +7,7 @@ interface IMoodMarkerRepository {
 
     suspend fun addMoodMarker(moodMarker: MoodMarker)
 
-//    suspend fun toggleFavorite(moodMarker: MoodMarker)
+//  suspend fun toggleFavorite(moodMarker: MoodMarker)
+
+//  suspend fun getFavorites() : List<MoodMarker>
 }

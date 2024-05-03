@@ -36,7 +36,7 @@ class MoodMarkerRepository(app: Application) : IMoodMarkerRepository {
 //        addMoodMarker(entry)
 //    }
 //
-//    fun getFavorites(): List<MoodMarker>{
-//        return _entries.filter { mm -> mm.isFavorite }
+//    override suspend fun getFavorites(): List<MoodMarker>{
+//        db.moodMarkersDao().getFavorites()
 //    }
 }

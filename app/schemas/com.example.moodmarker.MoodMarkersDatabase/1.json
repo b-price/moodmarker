@@ -2,16 +2,22 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "781762fbf18a71b7757d96dc17c8fdb9",
+    "identityHash": "24e407b7afd043c75725619d066b9adf",
     "entities": [
       {
         "tableName": "moodmarkers",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `dailyEntry` TEXT NOT NULL, `isFavorite` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `emotionType` TEXT NOT NULL, `dailyEntry` TEXT NOT NULL, `isFavorite` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
             "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "emotionType",
+            "columnName": "emotionType",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -40,7 +46,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '781762fbf18a71b7757d96dc17c8fdb9')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '24e407b7afd043c75725619d066b9adf')"
     ]
   }
 }

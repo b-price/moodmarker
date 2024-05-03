@@ -58,7 +58,10 @@ class EntriesViewModel(app: Application): AndroidViewModel(app) {
         _showDialog.value = true
     }
 
-//    fun getFavorites(): List<MoodMarker>{
-//        return _repository.getFavorites()
-//    }
+ /*   fun getFavorites(): List<MoodMarker>{
+        viewModelScope.launch {
+            _repository.getFavorites()
+        }
+
+    } */
 }
