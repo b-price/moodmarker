@@ -8,7 +8,7 @@ import java.util.Date
 
 @Entity(tableName = "moodmarkers")
 data class MoodMarker(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val id: Int,
     val emotionType : EmotionType,
     val dailyEntry : String,

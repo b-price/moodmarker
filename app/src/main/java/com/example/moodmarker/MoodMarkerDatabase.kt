@@ -22,7 +22,7 @@ interface MoodMarkersDao {
     //@Query("select * from moodmarkers where isFavorite = 1")
     //suspend fun getFavorites(): List<MoodMarker>
 }
-@Database(entities = [MoodMarker::class], version = 1, exportSchema = true)
+@Database(entities = [MoodMarker::class], version = 2, exportSchema = true)
 abstract class MoodMarkersDatabase : RoomDatabase() {
     abstract fun moodMarkersDao(): MoodMarkersDao
 }
