@@ -49,7 +49,7 @@ fun MoodMarkerRow(
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             Column {
-                Text(moodMarker.date.toString())
+                Text(moodMarker.date)
             }
             Column {
                 if (moodMarker.isFavorite){

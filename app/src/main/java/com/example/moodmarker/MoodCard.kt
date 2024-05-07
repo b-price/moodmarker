@@ -31,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.navigation.NavHostController
+import java.util.Date
 import kotlin.reflect.KFunction0
 
 @Composable
@@ -49,11 +50,6 @@ fun MoodCard(
             .padding(start = 16.dp, end = 16.dp, top = 5.dp, bottom = 5.dp)
             .fillMaxWidth()
     ) {
-        Column {
-
-
-
-        }
         Column(
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -161,7 +157,7 @@ fun MoodCard(
                     if (isEdit()){
                         vm.updateMoodMarker(moodMarker.value)
                         onEdit()
-                        vm.setPresetMoodMarker(MoodMarker(0, EmotionType.Happy, "", false))
+                        vm.setPresetMoodMarker(MoodMarker(0, EmotionType.Happy, "", false, Date().toString()))
                     } else {
                         vm.addMoodMarker(moodMarker.value)
                     }

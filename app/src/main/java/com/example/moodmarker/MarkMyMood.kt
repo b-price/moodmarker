@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.navigation.NavHostController
+import java.util.Date
 
 @Composable
 fun MarkMyMood(nav: NavHostController, onPickMood: (MoodMarker) -> Unit) {
@@ -27,32 +28,32 @@ fun MarkMyMood(nav: NavHostController, onPickMood: (MoodMarker) -> Unit) {
             Text("😐",
                 fontSize = 18.em,
                 modifier = Modifier.clickable {
-                    onPickMood(MoodMarker(0, EmotionType.Neutral, "", false))
+                    onPickMood(MoodMarker(0, EmotionType.Neutral, "", false, Date().toString()))
                     nav.navigate(Routes.AddMoodMarker.route)
                 }
             )
             Text("🙂", fontSize = 18.em, modifier = Modifier.clickable {
-                onPickMood(MoodMarker(0, EmotionType.Happy, "", false))
+                onPickMood(MoodMarker(0, EmotionType.Happy, "", false, Date().toString()))
                 nav.navigate(Routes.AddMoodMarker.route)
             })
         }
         Row {
             Text("😡", fontSize = 18.em, modifier = Modifier.clickable {
-                onPickMood(MoodMarker(0, EmotionType.Angry, "", false))
+                onPickMood(MoodMarker(0, EmotionType.Angry, "", false, Date().toString()))
                 nav.navigate(Routes.AddMoodMarker.route)
             })
             Text("🙁", fontSize = 18.em, modifier = Modifier.clickable {
-                onPickMood(MoodMarker(0, EmotionType.Sad, "", false))
+                onPickMood(MoodMarker(0, EmotionType.Sad, "", false, Date().toString()))
                 nav.navigate(Routes.AddMoodMarker.route)
             })
             Text("😁", fontSize = 18.em, modifier = Modifier.clickable {
-                onPickMood(MoodMarker(0, EmotionType.Excited, "", false))
+                onPickMood(MoodMarker(0, EmotionType.Excited, "", false, Date().toString()))
                 nav.navigate(Routes.AddMoodMarker.route)
             })
         }
         Row (modifier = Modifier.padding(50.dp)){
             Button(onClick = {
-                onPickMood(MoodMarker(0, EmotionType.Happy, "", false))
+                onPickMood(MoodMarker(0, EmotionType.Happy, "", false, Date().toString()))
                 nav.navigate(Routes.AddMoodMarker.route)
             }) {
                 Text("Mark My Mood!", fontSize = 7.em, modifier = Modifier.padding(10.dp))

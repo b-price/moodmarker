@@ -7,6 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import java.util.Date
 
 class EntriesViewModel(app: Application): AndroidViewModel(app) {
     private val _moodMarkerList: MutableState<List<MoodMarker>> = mutableStateOf(listOf())
@@ -23,7 +24,7 @@ class EntriesViewModel(app: Application): AndroidViewModel(app) {
             _moodMarkerList.value = _repository.getMoodMarkers()
         }
         _entryToBeDeleted = null
-        _presetMoodMarker = MoodMarker(0, EmotionType.Happy, "", false)
+        _presetMoodMarker = MoodMarker(0, EmotionType.Happy, "", false, Date().toString())
         _showDialog = mutableStateOf(false)
         showDialog = _showDialog
     }

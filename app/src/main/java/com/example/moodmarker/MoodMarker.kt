@@ -13,8 +13,7 @@ data class MoodMarker(
     val emotionType : EmotionType,
     val dailyEntry : String,
     val isFavorite : Boolean,
-
+    val date: String = Date().toString()
 ) {
-    @Ignore
-    val date: Date = Date()
+
 }
