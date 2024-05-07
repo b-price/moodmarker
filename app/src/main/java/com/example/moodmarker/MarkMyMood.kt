@@ -18,7 +18,8 @@ import androidx.navigation.NavHostController
 
 @Composable
 fun MarkMyMood(nav: NavHostController) {
-
+    //TODO: Add picture to moodmarker from camera roll
+    //TODO: Allow toggling favorite
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

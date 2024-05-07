@@ -36,7 +36,7 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
             arguments = listOf(navArgument("presetMood") { type = NavType.StringType }
             )){ backStackEntry ->
             MoodCard(navController, presetMood = backStackEntry.arguments?.getString("presetMood"))
-        }
+        } //TODO: Fix favorites page
  /*       composable(Routes.Favorites.route){
             val vm: EntriesViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
             val showDialog by vm.showDialog

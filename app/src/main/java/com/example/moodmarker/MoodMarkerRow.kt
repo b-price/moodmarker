@@ -44,6 +44,7 @@ fun MoodMarkerRow(
             Column {
                 Text(moodMarker.date.toString())
             }
+            //TODO: allow for toggling favorite: display empty heart when not
             Column {
                 if (moodMarker.isFavorite){
                     Icon(Icons.Default.Favorite, "Favorite")
@@ -80,7 +81,7 @@ fun MoodMarkerRow(
                 .padding(10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceEvenly
-        ){
+        ){ //TODO: Edit moodmarker
             Button(onClick = { onPrepareDelete(moodMarker) }) {
                 Text("Delete Entry")
             }

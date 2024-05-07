@@ -21,7 +21,7 @@ import androidx.navigation.NavHostController
 
 @Composable
 fun LoginPage(nav: NavHostController) {
-
+    //TODO: Implement login w/credentials
     val userName = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
 
