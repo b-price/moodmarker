@@ -5,7 +5,6 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
@@ -56,12 +55,8 @@ class EntriesViewModel(app: Application): AndroidViewModel(app) {
         _showDialog.value = true
     }
 
-    fun getFavorites(): List<MoodMarker>{
-        var favorites = listOf<MoodMarker>()
-        viewModelScope.launch {
-            favorites = _repository.getFavorites()
-        }
-        return favorites
+    fun getFavorites(): List<MoodMarker> {
+        return _moodMarkerList.value.filter { it.isFavorite }
     }
 
     fun updateMoodMarker(moodMarker: MoodMarker) {
