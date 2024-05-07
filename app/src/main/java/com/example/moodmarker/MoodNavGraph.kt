@@ -37,7 +37,7 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
             )){ backStackEntry ->
             MoodCard(navController, presetMood = backStackEntry.arguments?.getString("presetMood"))
         }
-        composable(Routes.Favorites.route){
+ /*       composable(Routes.Favorites.route){
             val vm: EntriesViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
             val showDialog by vm.showDialog
             Entries(
@@ -46,7 +46,7 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
                 onDelete = vm::deleteMoodMarker,
                 onPrepareDelete = vm::prepareDelete,
                 dismissDialog = vm::dismissDialog)
-        }
+        } */
         composable(Routes.Entries.route){
             val vm: EntriesViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
             val entries by vm.moodMarkerList
