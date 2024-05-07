@@ -18,8 +18,6 @@ interface MoodMarkersDao {
     suspend fun deleteMoodMarker(moodMarker: MoodMarker)
     @Update
     suspend fun updateMoodMarker(moodMarker: MoodMarker)
-//    @Query("select * from moodmarkers where isFavorite = 1")
-//    suspend fun getFavorites(): List<MoodMarker>
 }
 @Database(entities = [MoodMarker::class], version = 3, exportSchema = true)
 abstract class MoodMarkersDatabase : RoomDatabase() {

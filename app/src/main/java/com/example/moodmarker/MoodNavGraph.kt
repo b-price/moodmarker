@@ -9,11 +9,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 
 @Composable
 fun MoodNavGraph(navController: NavHostController = rememberNavController(), paddingValues: PaddingValues) {
@@ -32,14 +30,13 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
         composable(Routes.MainPage.route){
             MarkMyMood(navController, vm::setPresetMoodMarker)
         }
-//        composable(
-//            Routes.AddMoodMarker.route + "/{presetMood}",
-//            arguments = listOf(navArgument("presetMood") { type = NavType.StringType }
-//            )){ backStackEntry ->
-//            MoodCard(navController, presetMood = backStackEntry.arguments?.getString("presetMood"))
-//        } //TODO: Fix favorites page
         composable(Routes.AddMoodMarker.route){
-            MoodCard(nav = navController, vm, presetMood = vm.getPresetMoodMarker())
+            MoodCard(
+                nav = navController, vm,
+                presetMood = vm.getPresetMoodMarker(),
+                isEdit = vm::getIsEdit,
+                onEdit = vm::setIsEdit
+            )
         }
         composable(Routes.Favorites.route){
 
@@ -51,11 +48,12 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
                 onPrepareDelete = vm::prepareDelete,
                 dismissDialog = vm::dismissDialog,
                 onToggleFavorite = vm::toggleFavorite,
-                onEditMoodMarker = vm::setPresetMoodMarker
+                onEditMoodMarker = vm::setPresetMoodMarker,
+                nav = navController,
+                setEdit = vm::setIsEdit
             )
         }
         composable(Routes.Entries.route){
-            val vm: EntriesViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
             val entries by vm.moodMarkerList
             val showDialog by vm.showDialog
             Entries(
@@ -65,7 +63,9 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
                 onPrepareDelete = vm::prepareDelete,
                 dismissDialog = vm::dismissDialog,
                 onToggleFavorite = vm::toggleFavorite,
-                onEditMoodMarker = vm::setPresetMoodMarker
+                onEditMoodMarker = vm::setPresetMoodMarker,
+                nav = navController,
+                setEdit = vm::setIsEdit
             )
         }
         composable(Routes.Settings.route){

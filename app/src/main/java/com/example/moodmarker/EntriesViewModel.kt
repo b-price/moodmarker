@@ -16,6 +16,7 @@ class EntriesViewModel(app: Application): AndroidViewModel(app) {
     val showDialog: State<Boolean>
     private var _presetMoodMarker: MoodMarker
     private val _repository: IMoodMarkerRepository = MoodMarkerRepository(getApplication())
+    private var _isEdit: Boolean = false
 
     init {
         viewModelScope.launch {
@@ -82,5 +83,13 @@ class EntriesViewModel(app: Application): AndroidViewModel(app) {
 
     fun getPresetMoodMarker(): MoodMarker {
         return _presetMoodMarker
+    }
+
+    fun setIsEdit() {
+        _isEdit = !_isEdit
+    }
+
+    fun getIsEdit(): Boolean {
+        return _isEdit
     }
 }

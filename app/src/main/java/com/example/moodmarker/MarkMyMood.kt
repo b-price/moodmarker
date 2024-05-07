@@ -51,7 +51,10 @@ fun MarkMyMood(nav: NavHostController, onPickMood: (MoodMarker) -> Unit) {
             })
         }
         Row (modifier = Modifier.padding(50.dp)){
-            Button(onClick = { nav.navigate(Routes.AddMoodMarker.route + "/Happy") }) {
+            Button(onClick = {
+                onPickMood(MoodMarker(0, EmotionType.Happy, "", false))
+                nav.navigate(Routes.AddMoodMarker.route)
+            }) {
                 Text("Mark My Mood!", fontSize = 7.em, modifier = Modifier.padding(10.dp))
             }
         }

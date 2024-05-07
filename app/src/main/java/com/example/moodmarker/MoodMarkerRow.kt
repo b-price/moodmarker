@@ -23,13 +23,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.em
+import androidx.navigation.NavHostController
 
 @Composable
 fun MoodMarkerRow(
     moodMarker: MoodMarker,
     onPrepareDelete: (MoodMarker) -> Unit,
     onToggleFavorite: (MoodMarker) -> Unit,
-    onEditMoodMarker: (MoodMarker) -> Unit
+    onEditMoodMarker: (MoodMarker) -> Unit,
+    nav: NavHostController,
+    setEdit: () -> Unit
 ){
     Card(
         shape = RoundedCornerShape(5.dp),
@@ -96,11 +99,15 @@ fun MoodMarkerRow(
                 .padding(10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceEvenly
-        ){ //TODO: Edit moodmarker
+        ){
             Button(onClick = { onPrepareDelete(moodMarker) }) {
                 Text("Delete Entry")
             }
-            Button(onClick = { onEditMoodMarker(moodMarker) }) {
+            Button(onClick = {
+                onEditMoodMarker(moodMarker)
+                setEdit()
+                nav.navigate("AddMoodMarker")
+            }) {
                 Text("Edit Entry")
             }
         }

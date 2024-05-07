@@ -9,6 +9,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.navigation.NavHostController
+import kotlin.reflect.KFunction0
 import kotlin.reflect.KFunction1
 
 @Composable
@@ -19,9 +21,10 @@ fun Entries(
     onPrepareDelete: (MoodMarker) -> Unit,
     dismissDialog: () -> Unit,
     onToggleFavorite: (MoodMarker) -> Unit,
-    onEditMoodMarker: KFunction1<MoodMarker, Unit>
-
-){
+    onEditMoodMarker: KFunction1<MoodMarker, Unit>,
+    nav: NavHostController,
+    setEdit: KFunction0<Unit>,
+    ){
 
     Box(contentAlignment = Alignment.Center) {
         if (showDialog) {
@@ -32,7 +35,7 @@ fun Entries(
             val content: @Composable () -> Unit = {
                 LazyColumn{
                     items(entries) { entry ->
-                        MoodMarkerRow(entry, onPrepareDelete, onToggleFavorite, onEditMoodMarker)
+                        MoodMarkerRow(entry, onPrepareDelete, onToggleFavorite, onEditMoodMarker, nav, setEdit)
                     }
                 }
             }

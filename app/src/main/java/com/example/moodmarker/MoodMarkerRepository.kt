@@ -33,8 +33,4 @@ class MoodMarkerRepository(app: Application) : IMoodMarkerRepository {
     override suspend fun updateMoodMarker(moodMarker: MoodMarker){
         db.moodMarkersDao().updateMoodMarker(moodMarker)
     }
-
-//    override suspend fun getFavorites(): List<MoodMarker>{
-//        return db.moodMarkersDao().getFavorites()
-//    }
 }
