@@ -1,7 +1,6 @@
 package com.example.moodmarker
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -17,7 +16,7 @@ import androidx.compose.ui.unit.em
 import androidx.navigation.NavHostController
 
 @Composable
-fun MarkMyMood(nav: NavHostController) {
+fun MarkMyMood(nav: NavHostController, onPickMood: (MoodMarker) -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -28,22 +27,27 @@ fun MarkMyMood(nav: NavHostController) {
             Text("😐",
                 fontSize = 18.em,
                 modifier = Modifier.clickable {
-                    nav.navigate(Routes.AddMoodMarker.route + "/Neutral")
+                    onPickMood(MoodMarker(0, EmotionType.Neutral, "", false))
+                    nav.navigate(Routes.AddMoodMarker.route)
                 }
             )
             Text("🙂", fontSize = 18.em, modifier = Modifier.clickable {
-                nav.navigate(Routes.AddMoodMarker.route + "/Happy")
+                onPickMood(MoodMarker(0, EmotionType.Happy, "", false))
+                nav.navigate(Routes.AddMoodMarker.route)
             })
         }
         Row {
             Text("😡", fontSize = 18.em, modifier = Modifier.clickable {
-                nav.navigate(Routes.AddMoodMarker.route + "/Angry")
+                onPickMood(MoodMarker(0, EmotionType.Angry, "", false))
+                nav.navigate(Routes.AddMoodMarker.route)
             })
             Text("🙁", fontSize = 18.em, modifier = Modifier.clickable {
-                nav.navigate(Routes.AddMoodMarker.route + "/Sad")
+                onPickMood(MoodMarker(0, EmotionType.Sad, "", false))
+                nav.navigate(Routes.AddMoodMarker.route)
             })
             Text("😁", fontSize = 18.em, modifier = Modifier.clickable {
-                nav.navigate(Routes.AddMoodMarker.route + "/Excited")
+                onPickMood(MoodMarker(0, EmotionType.Excited, "", false))
+                nav.navigate(Routes.AddMoodMarker.route)
             })
         }
         Row (modifier = Modifier.padding(50.dp)){

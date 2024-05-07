@@ -22,15 +22,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.pointer.PointerIcon.Companion.Text
 import androidx.compose.ui.unit.em
-import java.text.DateFormat
 
 @Composable
 fun MoodMarkerRow(
     moodMarker: MoodMarker,
     onPrepareDelete: (MoodMarker) -> Unit,
-    onToggleFavorite: (MoodMarker) -> Unit
+    onToggleFavorite: (MoodMarker) -> Unit,
+    onEditMoodMarker: (MoodMarker) -> Unit
 ){
     Card(
         shape = RoundedCornerShape(5.dp),
@@ -100,6 +99,9 @@ fun MoodMarkerRow(
         ){ //TODO: Edit moodmarker
             Button(onClick = { onPrepareDelete(moodMarker) }) {
                 Text("Delete Entry")
+            }
+            Button(onClick = { onEditMoodMarker(moodMarker) }) {
+                Text("Edit Entry")
             }
         }
     }

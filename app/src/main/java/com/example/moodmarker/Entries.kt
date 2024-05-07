@@ -6,11 +6,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import kotlin.reflect.KFunction1
 
 @Composable
 fun Entries(
@@ -19,7 +18,8 @@ fun Entries(
     onDelete: () -> Unit,
     onPrepareDelete: (MoodMarker) -> Unit,
     dismissDialog: () -> Unit,
-    onToggleFavorite: (MoodMarker) -> Unit
+    onToggleFavorite: (MoodMarker) -> Unit,
+    onEditMoodMarker: KFunction1<MoodMarker, Unit>
 
 ){
 
@@ -32,7 +32,7 @@ fun Entries(
             val content: @Composable () -> Unit = {
                 LazyColumn{
                     items(entries) { entry ->
-                        MoodMarkerRow(entry, onPrepareDelete, onToggleFavorite)
+                        MoodMarkerRow(entry, onPrepareDelete, onToggleFavorite, onEditMoodMarker)
                     }
                 }
             }

@@ -1,6 +1,7 @@
 package com.example.moodmarker
 
 import androidx.activity.ComponentActivity
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -8,9 +9,15 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -30,18 +37,18 @@ import java.util.Date
 @Composable
 fun MoodCard(
     nav: NavHostController,
-    vm: EntriesViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity),
-    presetMood: String? = "Happy"
+    vm: EntriesViewModel,
+    presetMood: MoodMarker
 ) {
-    val mood = when (presetMood) {
-        "Angry" -> EmotionType.Angry
-        "Neutral" -> EmotionType.Neutral
-        "Sad" -> EmotionType.Sad
-        "Excited" -> EmotionType.Excited
-        else -> EmotionType.Happy
-    }
+//    val mood = when (presetMood) {
+//        "Angry" -> EmotionType.Angry
+//        "Neutral" -> EmotionType.Neutral
+//        "Sad" -> EmotionType.Sad
+//        "Excited" -> EmotionType.Excited
+//        else -> EmotionType.Happy
+//    }
 
-    val moodMarker = remember { mutableStateOf(MoodMarker(0, mood, "", false)) }
+    val moodMarker = remember { mutableStateOf(presetMood) }
 
     Card(
         shape = RoundedCornerShape(5.dp),
@@ -62,6 +69,21 @@ fun MoodCard(
                     })
                      {
                     Text("Submit")
+                }
+                if (moodMarker.value.isFavorite){
+                    Icon(
+                        Icons.Default.Favorite,
+                        "Favorite",
+                        modifier = Modifier.clickable { moodMarker.value = moodMarker.value.copy(isFavorite = false) }
+                            .size(30.dp),
+                        tint = MaterialTheme.colorScheme.primary)
+                } else {
+                    Icon(
+                        Icons.Outlined.FavoriteBorder,
+                        "Not Favorite",
+                        modifier = Modifier.clickable { moodMarker.value = moodMarker.value.copy(isFavorite = true) }
+                            .size(30.dp),
+                        tint = MaterialTheme.colorScheme.primary)
                 }
             }
 

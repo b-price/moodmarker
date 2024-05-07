@@ -15,6 +15,7 @@ class EntriesViewModel(app: Application): AndroidViewModel(app) {
     private var _entryToBeDeleted: MoodMarker?
     private val _showDialog: MutableState<Boolean>
     val showDialog: State<Boolean>
+    private var _presetMoodMarker: MoodMarker
     private val _repository: IMoodMarkerRepository = MoodMarkerRepository(getApplication())
 
     init {
@@ -22,6 +23,7 @@ class EntriesViewModel(app: Application): AndroidViewModel(app) {
             _moodMarkerList.value = _repository.getMoodMarkers()
         }
         _entryToBeDeleted = null
+        _presetMoodMarker = MoodMarker(0, EmotionType.Happy, "", false)
         _showDialog = mutableStateOf(false)
         showDialog = _showDialog
     }
@@ -77,5 +79,13 @@ class EntriesViewModel(app: Application): AndroidViewModel(app) {
             !moodMarker.isFavorite
         )
         updateMoodMarker(updateMood)
+    }
+
+    fun setPresetMoodMarker(moodMarker: MoodMarker) {
+        _presetMoodMarker = moodMarker
+    }
+
+    fun getPresetMoodMarker(): MoodMarker {
+        return _presetMoodMarker
     }
 }
