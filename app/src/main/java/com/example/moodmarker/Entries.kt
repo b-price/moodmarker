@@ -25,7 +25,7 @@ fun Entries(
     nav: NavHostController,
     setEdit: KFunction0<Unit>,
     ){
-
+    val entriesRev = entries.reversed()
     Box(contentAlignment = Alignment.Center) {
         if (showDialog) {
             ConfirmDialog(onDelete = onDelete, onDismiss = dismissDialog )
@@ -34,7 +34,7 @@ fun Entries(
             //SearchBar(onFilter = onFilter)
             val content: @Composable () -> Unit = {
                 LazyColumn{
-                    items(entries) { entry ->
+                    items(entriesRev) { entry ->
                         MoodMarkerRow(entry, onPrepareDelete, onToggleFavorite, onEditMoodMarker, nav, setEdit)
                     }
                 }
