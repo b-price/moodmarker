@@ -18,7 +18,8 @@ fun Entries(
     showDialog: Boolean = false,
     onDelete: () -> Unit,
     onPrepareDelete: (MoodMarker) -> Unit,
-    dismissDialog: () -> Unit
+    dismissDialog: () -> Unit,
+    onToggleFavorite: (MoodMarker) -> Unit
 
 ){
 
@@ -31,7 +32,7 @@ fun Entries(
             val content: @Composable () -> Unit = {
                 LazyColumn{
                     items(entries) { entry ->
-                        MoodMarkerRow(entry, onPrepareDelete)
+                        MoodMarkerRow(entry, onPrepareDelete, onToggleFavorite)
                     }
                 }
             }

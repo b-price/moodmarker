@@ -37,7 +37,7 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
             )){ backStackEntry ->
             MoodCard(navController, presetMood = backStackEntry.arguments?.getString("presetMood"))
         } //TODO: Fix favorites page
- /*       composable(Routes.Favorites.route){
+        composable(Routes.Favorites.route){
             val vm: EntriesViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
             val showDialog by vm.showDialog
             Entries(
@@ -45,8 +45,9 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
                 showDialog = showDialog,
                 onDelete = vm::deleteMoodMarker,
                 onPrepareDelete = vm::prepareDelete,
-                dismissDialog = vm::dismissDialog)
-        } */
+                dismissDialog = vm::dismissDialog,
+                onToggleFavorite = vm::toggleFavorite)
+        }
         composable(Routes.Entries.route){
             val vm: EntriesViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
             val entries by vm.moodMarkerList
@@ -56,7 +57,8 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
                 showDialog = showDialog,
                 onDelete = vm::deleteMoodMarker,
                 onPrepareDelete = vm::prepareDelete,
-                dismissDialog = vm::dismissDialog)
+                dismissDialog = vm::dismissDialog,
+                onToggleFavorite = vm::toggleFavorite)
         }
         composable(Routes.Settings.route){
             Settings(navController)

@@ -21,7 +21,6 @@ class EntriesViewModel(app: Application): AndroidViewModel(app) {
         viewModelScope.launch {
             _moodMarkerList.value = _repository.getMoodMarkers()
         }
-
         _entryToBeDeleted = null
         _showDialog = mutableStateOf(false)
         showDialog = _showDialog
@@ -32,7 +31,6 @@ class EntriesViewModel(app: Application): AndroidViewModel(app) {
             _repository.addMoodMarker(entry)
             _moodMarkerList.value = _repository.getMoodMarkers()
         }
-
     }
 
     fun deleteMoodMarker(){
@@ -44,8 +42,6 @@ class EntriesViewModel(app: Application): AndroidViewModel(app) {
             _moodMarkerList.value = _repository.getMoodMarkers()
             dismissDialog()
         }
-
-
     }
 
     fun dismissDialog() {
@@ -58,10 +54,28 @@ class EntriesViewModel(app: Application): AndroidViewModel(app) {
         _showDialog.value = true
     }
 
- /*   fun getFavorites(): List<MoodMarker>{
+    fun getFavorites(): List<MoodMarker>{
+        var favorites = listOf<MoodMarker>()
         viewModelScope.launch {
-            _repository.getFavorites()
+            favorites = _repository.getFavorites()
         }
+        return favorites
+    }
 
-    } */
+    fun updateMoodMarker(moodMarker: MoodMarker) {
+        viewModelScope.launch {
+            _repository.updateMoodMarker(moodMarker)
+            _moodMarkerList.value = _repository.getMoodMarkers()
+        }
+    }
+
+    fun toggleFavorite(moodMarker: MoodMarker) {
+        val updateMood = MoodMarker(
+            moodMarker.id,
+            moodMarker.emotionType,
+            moodMarker.dailyEntry,
+            !moodMarker.isFavorite
+        )
+        updateMoodMarker(updateMood)
+    }
 }

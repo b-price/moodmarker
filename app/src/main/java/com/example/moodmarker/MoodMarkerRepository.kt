@@ -2,7 +2,6 @@ package com.example.moodmarker
 
 import android.app.Application
 import androidx.room.Room
-import java.util.Date
 
 class MoodMarkerRepository(app: Application) : IMoodMarkerRepository {
     //private var _entries = listOf<MoodMarker>()
@@ -31,12 +30,11 @@ class MoodMarkerRepository(app: Application) : IMoodMarkerRepository {
         db.moodMarkersDao().addMoodMarker(moodMarker)
     }
 
-//    fun updateMoodMarker(entry: MoodMarker){
-//        deleteMoodMarker(entry)
-//        addMoodMarker(entry)
-//    }
-//
-//    override suspend fun getFavorites(): List<MoodMarker>{
-//        db.moodMarkersDao().getFavorites()
-//    }
+    override suspend fun updateMoodMarker(moodMarker: MoodMarker){
+        db.moodMarkersDao().updateMoodMarker(moodMarker)
+    }
+
+    override suspend fun getFavorites(): List<MoodMarker>{
+        return db.moodMarkersDao().getFavorites()
+    }
 }

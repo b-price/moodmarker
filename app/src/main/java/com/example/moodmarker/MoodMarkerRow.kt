@@ -1,18 +1,22 @@
 package com.example.moodmarker
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,7 +29,8 @@ import java.text.DateFormat
 @Composable
 fun MoodMarkerRow(
     moodMarker: MoodMarker,
-    onPrepareDelete: (MoodMarker) -> Unit
+    onPrepareDelete: (MoodMarker) -> Unit,
+    onToggleFavorite: (MoodMarker) -> Unit
 ){
     Card(
         shape = RoundedCornerShape(5.dp),
@@ -44,10 +49,21 @@ fun MoodMarkerRow(
             Column {
                 Text(moodMarker.date.toString())
             }
-            //TODO: allow for toggling favorite: display empty heart when not
             Column {
                 if (moodMarker.isFavorite){
-                    Icon(Icons.Default.Favorite, "Favorite")
+                    Icon(
+                        Icons.Default.Favorite,
+                        "Favorite",
+                        modifier = Modifier.clickable { onToggleFavorite(moodMarker) }
+                            .size(30.dp),
+                        tint = MaterialTheme.colorScheme.primary)
+                } else {
+                    Icon(
+                        Icons.Outlined.FavoriteBorder,
+                        "Not Favorite",
+                        modifier = Modifier.clickable { onToggleFavorite(moodMarker) }
+                            .size(30.dp),
+                        tint = MaterialTheme.colorScheme.primary)
                 }
             }
         }
