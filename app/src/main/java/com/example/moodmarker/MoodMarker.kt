@@ -13,7 +13,8 @@ data class MoodMarker(
     val emotionType : EmotionType,
     val dailyEntry : String,
     val isFavorite : Boolean,
-    val date: String = Date().toString()
+    val date: String = Date().toString(),
+    val imageURI: String? = null
 ) {
 
 }

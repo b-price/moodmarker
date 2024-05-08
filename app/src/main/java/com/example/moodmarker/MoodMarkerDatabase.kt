@@ -19,7 +19,7 @@ interface MoodMarkersDao {
     @Update
     suspend fun updateMoodMarker(moodMarker: MoodMarker)
 }
-@Database(entities = [MoodMarker::class], version = 4, exportSchema = true)
+@Database(entities = [MoodMarker::class], version = 5, exportSchema = true)
 abstract class MoodMarkersDatabase : RoomDatabase() {
     abstract fun moodMarkersDao(): MoodMarkersDao
 }
