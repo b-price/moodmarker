@@ -23,7 +23,7 @@ class QuoteViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             try {
                 val fetchedQuotes = quotesFetcher.fetchQuotes()
-                _quote.value = fetchedQuotes.firstOrNull()
+                _quote.value = fetchedQuotes.random()
             } catch (e: Exception) {
                 Log.e("QuoteViewModel", "Error fetching quotes: ${e.message}", e)
                 _quote.value = "Error fetching quotes"
