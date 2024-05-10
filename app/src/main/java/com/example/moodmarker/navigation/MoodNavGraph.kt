@@ -13,8 +13,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.moodmarker.account.CreateAccount
+import com.example.moodmarker.account.CreateAccountViewModel
 import com.example.moodmarker.account.LoginPage
+import com.example.moodmarker.account.LoginViewModel
 import com.example.moodmarker.account.ProfilePage
+import com.example.moodmarker.account.ProfileViewModel
 import com.example.moodmarker.account.Settings
 import com.example.moodmarker.moodEntries.Entries
 import com.example.moodmarker.moodEntries.EntriesViewModel
@@ -24,17 +27,26 @@ import com.example.moodmarker.moodEntries.MoodCard
 @Composable
 fun MoodNavGraph(navController: NavHostController = rememberNavController(), paddingValues: PaddingValues) {
     val vm: EntriesViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
+    val vmL: LoginViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
+    val vmCA: CreateAccountViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
+    val vmP: ProfileViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
+
     NavHost(
         navController = navController,
         startDestination = Routes.LoginPage.route,
         modifier = Modifier.padding(paddingValues)
     ){
         composable(Routes.LoginPage.route){
-            LoginPage(navController)
+            val users by vmL.userList
+            LoginPage(
+                users = users,
+                nav = navController)
         }
 
         composable(Routes.CreateAccount.route){
-            CreateAccount(navController)
+            val users by vmCA.userList
+            CreateAccount(users = users,
+                nav = navController)
         }
 
         composable(Routes.MainPage.route){
@@ -87,7 +99,10 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
         }
 
         composable(Routes.ProfilePage.route){
-            ProfilePage(navController)
+            val users by vmP.userList
+            ProfilePage(
+                users = users,
+                nav = navController)
         }
 
         composable(Routes.AppSettings.route){
