@@ -32,12 +32,15 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
         composable(Routes.LoginPage.route){
             LoginPage(navController)
         }
+
         composable(Routes.CreateAccount.route){
             CreateAccount(navController)
         }
+
         composable(Routes.MainPage.route){
             MarkMyMood(navController, vm::setPresetMoodMarker)
         }
+
         composable(Routes.AddMoodMarker.route){
             MoodCard(
                 nav = navController, vm,
@@ -46,6 +49,7 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
                 onEdit = vm::setIsEdit
             )
         }
+
         composable(Routes.Favorites.route){
 
             val showDialog by vm.showDialog
@@ -61,6 +65,7 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
                 setEdit = vm::setIsEdit
             )
         }
+
         composable(Routes.Entries.route){
             val entries by vm.moodMarkerList
             val showDialog by vm.showDialog
@@ -76,12 +81,15 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
                 setEdit = vm::setIsEdit
             )
         }
+
         composable(Routes.Settings.route){
             Settings(navController)
         }
+
         composable(Routes.ProfilePage.route){
             ProfilePage(navController)
         }
+
         composable(Routes.AppSettings.route){
             /* TODO: Settings */
         }
