@@ -14,20 +14,7 @@ import com.example.moodmarker.moodEntries.EmotionType
 import kotlinx.coroutines.launch
 import java.util.Date
 
-class SettingsViewModel(app: Application): AndroidViewModel(app) {
-    private val _userList: MutableState<List<User>> = mutableStateOf(listOf())
-    val userList: State<List<User>> = _userList
-    private val _repository: IMoodMarkerRepository = MoodMarkerRepository(getApplication())
-
-    init {
-        viewModelScope.launch {
-            _userList.value = _repository.getUsers()
-        }
-//        _entryToBeDeleted = null
-//        _presetMoodMarker = MoodMarker(0, EmotionType.Happy, "", false, Date().toString())
-//        _showDialog = mutableStateOf(false)
-//        showDialog = _showDialog
-    }
+class SettingsViewModel{
 
 
 }

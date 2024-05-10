@@ -16,9 +16,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import com.example.moodmarker.db.entities.User
 
 @Composable
-fun ProfilePage(nav: NavHostController) {
+fun ProfilePage(
+    users: List<User>,
+    nav: NavHostController) {
 
     val name = remember { mutableStateOf("") }
     val userName = remember { mutableStateOf("") }

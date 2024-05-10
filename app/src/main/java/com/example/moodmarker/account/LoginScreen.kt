@@ -28,11 +28,17 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.navigation.NavHostController
+import com.example.moodmarker.db.entities.MoodMarker
+import com.example.moodmarker.db.entities.User
 import com.example.moodmarker.navigation.Routes
 import com.example.moodmarker.ui.theme.components.LoginFields
 
 @Composable
-fun LoginPage(nav: NavHostController) {
+fun LoginPage(
+    users: List<User>,
+    nav: NavHostController
+
+) {
     //TODO: Implement login w/credentials
     val (userName, setUserName) = rememberSaveable { mutableStateOf("") }
     val (password, setPassword) = rememberSaveable { mutableStateOf("") }

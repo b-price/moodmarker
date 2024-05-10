@@ -30,11 +30,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.em
+import com.example.moodmarker.db.entities.User
 import com.example.moodmarker.navigation.Routes
 import com.example.moodmarker.ui.theme.components.LoginFields
 
 @Composable
-fun CreateAccount(nav: NavHostController) {
+fun CreateAccount(
+    users: List<User>,
+    nav: NavHostController
+) {
 
 
     val (firstName, onFirstNameChange) = rememberSaveable { mutableStateOf("") }
