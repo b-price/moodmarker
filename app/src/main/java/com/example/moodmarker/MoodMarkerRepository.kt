@@ -2,6 +2,7 @@ package com.example.moodmarker
 
 import android.app.Application
 import androidx.room.Room
+import com.example.moodmarker.entities.MoodMarker
 
 class MoodMarkerRepository(app: Application) : IMoodMarkerRepository {
     private val db: MoodMarkersDatabase

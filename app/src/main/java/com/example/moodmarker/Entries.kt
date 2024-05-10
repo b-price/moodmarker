@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.navigation.NavHostController
+import com.example.moodmarker.entities.MoodMarker
 import kotlin.reflect.KFunction0
 import kotlin.reflect.KFunction1
 

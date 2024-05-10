@@ -1,5 +1,7 @@
 package com.example.moodmarker
 
+import com.example.moodmarker.entities.MoodMarker
+
 interface IMoodMarkerRepository {
     suspend fun getMoodMarkers() : List<MoodMarker>
 

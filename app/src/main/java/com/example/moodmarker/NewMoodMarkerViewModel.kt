@@ -4,6 +4,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import com.example.moodmarker.entities.MoodMarker
 
 class NewMoodMarkerViewModel: ViewModel() {
     private val _dailyEntry: MutableState<String> = mutableStateOf("")

@@ -46,7 +46,7 @@ fun CreateAccount(nav: NavHostController) {
     val (userName, onUserNameChange) = rememberSaveable { mutableStateOf("") }
 
     var arePasswordsSame by remember { mutableStateOf(false) }
-    val areFieldsEmpty = firstName.isNotEmpty() && password.isNotEmpty() && lastName.isNotEmpty() && confirmPassword.isNotEmpty() && email.isNotEmpty()
+    val areFieldsEmpty = firstName.isNotEmpty() && password.isNotEmpty() && lastName.isNotEmpty() && confirmPassword.isNotEmpty() && email.isNotEmpty() && userName.isNotEmpty()
 
     Column(
         modifier = Modifier
@@ -69,16 +69,6 @@ fun CreateAccount(nav: NavHostController) {
                 .align(alignment = Alignment.Start)
             //color = Color.
         )
-
-
-//        /** Username Create Account Field **/
-//        LoginFields(
-//            value = firstName,
-//            onValueChange = onFirstNameChange,
-//            labelText = "First Name",
-//            modifier = Modifier.fillMaxWidth()
-//        )
-//        Spacer(Modifier.height(8.dp))
 
 
         /** First Name Create Account Field **/
@@ -109,6 +99,16 @@ fun CreateAccount(nav: NavHostController) {
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(Modifier.height(10.dp))
+
+
+        /** Username Create Account Field **/
+        LoginFields(
+            value = userName,
+            onValueChange = onUserNameChange,
+            labelText = "Username",
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(Modifier.height(8.dp))
 
 
         /** Password Create Account Field **/

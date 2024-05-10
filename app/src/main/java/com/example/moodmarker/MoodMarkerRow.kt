@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.em
 import androidx.navigation.NavHostController
+import com.example.moodmarker.entities.MoodMarker
 
 @Composable
 fun MoodMarkerRow(
