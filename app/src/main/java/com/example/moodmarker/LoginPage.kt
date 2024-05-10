@@ -43,6 +43,8 @@ fun LoginPage(nav: NavHostController) {
     val (password, setPassword) = rememberSaveable { mutableStateOf("") }
     val (rememberMe, setRememberMe) = rememberSaveable { mutableStateOf(false) }
 
+    val areFieldsEmpty = userName.isNotEmpty() && password.isNotEmpty()
+
 //    val emojiList = listOf("😁", "😡", "🙁", "🙂", "😐")
 //    val randomEmojiOne = emojiList.shuffled().take(1)[0]
 //    val randomEmojiTwo = emojiList.shuffled().take(1)[0]
@@ -112,7 +114,7 @@ fun LoginPage(nav: NavHostController) {
 //        }
 
         /** Login Button **/
-        Button(onClick = { nav.navigate(Routes.MainPage.route) }, modifier = Modifier.fillMaxWidth() ) {
+        Button(onClick = { nav.navigate(Routes.MainPage.route) }, modifier = Modifier.fillMaxWidth(), enabled = areFieldsEmpty ) {
                 Text("Login", fontSize = 5.em)
         }
         Spacer(modifier = Modifier.height(10.dp))

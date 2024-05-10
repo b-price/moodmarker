@@ -1,5 +1,6 @@
 package com.example.moodmarker
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,7 +25,9 @@ import androidx.navigation.NavHostController
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -42,6 +45,9 @@ fun CreateAccount(nav: NavHostController) {
     val (confirmPassword, onConfirmPasswordChange) = rememberSaveable { mutableStateOf("") }
     val (userName, onUserNameChange) = rememberSaveable { mutableStateOf("") }
 
+    var arePasswordsSame by remember { mutableStateOf(false) }
+    val areFieldsEmpty = firstName.isNotEmpty() && password.isNotEmpty() && lastName.isNotEmpty() && confirmPassword.isNotEmpty() && email.isNotEmpty()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -49,6 +55,10 @@ fun CreateAccount(nav: NavHostController) {
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        AnimatedVisibility(arePasswordsSame) {
+            Text("Passwords Are Not the Same", color = MaterialTheme.colorScheme.error)
+        }
+
         /** Create Account Header Text **/
         Text(
             text = "Create Account",
@@ -126,7 +136,12 @@ fun CreateAccount(nav: NavHostController) {
 
 
         /** Submit Button **/
-        Button(onClick = { nav.navigate(Routes.MainPage.route) }, modifier = Modifier.fillMaxWidth() ) {
+        Button(onClick = {
+            arePasswordsSame = password != confirmPassword
+            if(!arePasswordsSame) {
+                nav.navigate(Routes.MainPage.route)
+            }
+            }, modifier = Modifier.fillMaxWidth(), enabled = areFieldsEmpty ) {
             Text("Submit", fontSize = 5.em)
         }
 //        Spacer(modifier = Modifier.height(20.dp))
