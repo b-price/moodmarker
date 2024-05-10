@@ -12,12 +12,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.moodmarker.account.AccountsViewModel
 import com.example.moodmarker.account.CreateAccount
-import com.example.moodmarker.account.CreateAccountViewModel
+import com.example.moodmarker.account.vms.CreateAccountViewModel
 import com.example.moodmarker.account.LoginPage
-import com.example.moodmarker.account.LoginViewModel
+import com.example.moodmarker.account.vms.LoginViewModel
 import com.example.moodmarker.account.ProfilePage
-import com.example.moodmarker.account.ProfileViewModel
+import com.example.moodmarker.account.vms.ProfileViewModel
 import com.example.moodmarker.account.Settings
 import com.example.moodmarker.moodEntries.Entries
 import com.example.moodmarker.moodEntries.EntriesViewModel
@@ -27,9 +28,10 @@ import com.example.moodmarker.moodEntries.MoodCard
 @Composable
 fun MoodNavGraph(navController: NavHostController = rememberNavController(), paddingValues: PaddingValues) {
     val vm: EntriesViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
-    val vmL: LoginViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
-    val vmCA: CreateAccountViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
-    val vmP: ProfileViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
+    val vmAccounts: AccountsViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
+//    val vmL: LoginViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
+//    val vmCA: CreateAccountViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
+//    val vmP: ProfileViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
 
     NavHost(
         navController = navController,
@@ -37,14 +39,14 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
         modifier = Modifier.padding(paddingValues)
     ){
         composable(Routes.LoginPage.route){
-            val users by vmL.userList
+            val users by vmAccounts.userList
             LoginPage(
                 users = users,
                 nav = navController)
         }
 
         composable(Routes.CreateAccount.route){
-            val users by vmCA.userList
+            val users by vmAccounts.userList
             CreateAccount(users = users,
                 nav = navController)
         }
@@ -99,7 +101,7 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
         }
 
         composable(Routes.ProfilePage.route){
-            val users by vmP.userList
+            val users by vmAccounts.userList
             ProfilePage(
                 users = users,
                 nav = navController)

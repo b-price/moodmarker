@@ -1,4 +1,4 @@
-package com.example.moodmarker.account
+package com.example.moodmarker.account.vms
 
 import android.app.Application
 import androidx.compose.runtime.MutableState

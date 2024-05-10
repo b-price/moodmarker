@@ -1,4 +1,4 @@
-package com.example.moodmarker.account
+package com.example.moodmarker.account.vms
 
 import android.app.Application
 import androidx.compose.runtime.MutableState
@@ -14,17 +14,7 @@ import com.example.moodmarker.moodEntries.EmotionType
 import kotlinx.coroutines.launch
 import java.util.Date
 
-class CreateAccountViewModel(app: Application): AndroidViewModel(app) {
-    private val _userList: MutableState<List<User>> = mutableStateOf(listOf())
-    val userList: State<List<User>> = _userList
-    private val _repository: IMoodMarkerRepository = MoodMarkerRepository(getApplication())
-
-    init {
-        viewModelScope.launch {
-            _userList.value = _repository.getUsers()
-        }
-    }
-
+class SettingsViewModel{
 
 
 }
