@@ -1,6 +1,6 @@
-package com.example.moodmarker
+package com.example.moodmarker.db
 
-import com.example.moodmarker.entities.MoodMarker
+import com.example.moodmarker.db.entities.MoodMarker
 
 interface IMoodMarkerRepository {
     suspend fun getMoodMarkers() : List<MoodMarker>

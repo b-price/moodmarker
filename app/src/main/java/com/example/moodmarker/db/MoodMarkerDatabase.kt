@@ -1,4 +1,4 @@
-package com.example.moodmarker
+package com.example.moodmarker.db
 
 import androidx.room.Dao
 import androidx.room.Database
@@ -7,7 +7,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.RoomDatabase
 import androidx.room.Update
-import com.example.moodmarker.entities.MoodMarker
+import com.example.moodmarker.db.entities.MoodMarker
 
 @Dao
 interface MoodMarkersDao {

@@ -1,4 +1,4 @@
-package com.example.moodmarker
+package com.example.moodmarker.navigation
 
 sealed class Routes(val route: String) {
     object MainPage : Routes("mainPage")

@@ -1,8 +1,8 @@
-package com.example.moodmarker.entities
+package com.example.moodmarker.db.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.moodmarker.EmotionType
+import com.example.moodmarker.moodEntries.EmotionType
 //import java.sql.Time
 import java.util.Date
 

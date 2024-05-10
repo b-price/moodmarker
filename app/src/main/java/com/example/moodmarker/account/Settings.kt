@@ -1,4 +1,4 @@
-package com.example.moodmarker
+package com.example.moodmarker.account
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.navigation.NavHostController
+import com.example.moodmarker.navigation.Routes
 
 @Composable
 fun Settings(nav: NavHostController) {

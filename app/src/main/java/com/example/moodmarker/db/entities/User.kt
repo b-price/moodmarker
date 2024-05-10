@@ -1,4 +1,4 @@
-package com.example.moodmarker.entities
+package com.example.moodmarker.db.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

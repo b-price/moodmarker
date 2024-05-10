@@ -1,8 +1,8 @@
-package com.example.moodmarker
+package com.example.moodmarker.db
 
 import android.app.Application
 import androidx.room.Room
-import com.example.moodmarker.entities.MoodMarker
+import com.example.moodmarker.db.entities.MoodMarker
 
 class MoodMarkerRepository(app: Application) : IMoodMarkerRepository {
     private val db: MoodMarkersDatabase

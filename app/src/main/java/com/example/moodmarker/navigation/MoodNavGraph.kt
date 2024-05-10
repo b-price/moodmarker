@@ -1,4 +1,4 @@
-package com.example.moodmarker
+package com.example.moodmarker.navigation
 
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.PaddingValues
@@ -12,6 +12,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.moodmarker.account.CreateAccount
+import com.example.moodmarker.account.LoginPage
+import com.example.moodmarker.account.ProfilePage
+import com.example.moodmarker.account.Settings
+import com.example.moodmarker.moodEntries.Entries
+import com.example.moodmarker.moodEntries.EntriesViewModel
+import com.example.moodmarker.moodEntries.MarkMyMood
+import com.example.moodmarker.moodEntries.MoodCard
 
 @Composable
 fun MoodNavGraph(navController: NavHostController = rememberNavController(), paddingValues: PaddingValues) {

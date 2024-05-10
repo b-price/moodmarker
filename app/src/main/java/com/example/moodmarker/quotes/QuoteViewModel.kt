@@ -1,4 +1,4 @@
-package com.example.moodmarker
+package com.example.moodmarker.quotes
 
 import android.app.Application
 import android.util.Log

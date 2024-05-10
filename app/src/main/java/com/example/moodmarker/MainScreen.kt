@@ -27,6 +27,8 @@ import androidx.compose.ui.unit.em
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.moodmarker.navigation.MoodNavGraph
+import com.example.moodmarker.navigation.Routes
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -76,7 +78,7 @@ private fun BottomBar(nav: NavHostController) {
     val currentRoute: String? = currentBackStack?.destination?.route
     NavigationBar {
         NavigationBarItem(
-            selected = currentRoute == Routes.MainPage.route, 
+            selected = currentRoute == Routes.MainPage.route,
             onClick = { nav.navigate(Routes.MainPage.route) },
             icon = { Icon(Icons.Default.Home, "Home")},
             label = { Text("Home")})
