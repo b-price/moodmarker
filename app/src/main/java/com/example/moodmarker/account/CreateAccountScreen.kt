@@ -39,10 +39,11 @@ fun CreateAccount(
     users: List<User>,
     nav: NavHostController,
     vmAccounts: AccountsViewModel,
-    emptyUser: User
+    emptyUser: User,
+
 //    user: User
 ) {
-    val user = remember { mutableStateOf(emptyUser)}
+    var user = remember { mutableStateOf(emptyUser)}
 
     val (firstName, onFirstNameChange) = rememberSaveable { mutableStateOf("") }
     val (lastName, onLastNameChange) = rememberSaveable { mutableStateOf("") }
@@ -148,12 +149,15 @@ fun CreateAccount(
 
         /** Submit Button **/
         Button(onClick = {
-
-            /** TODO Fix Signup Verification **/
             arePasswordsSame = password != confirmPassword
-            userNameExists = users.any{ it.userName == userName }
-            if(!arePasswordsSame && !userNameExists) {
-
+            /** TODO Fix Signup Verification **/
+//            userNameExists = users.any{ it.userName == user.value.userName }
+            if(!arePasswordsSame /*&& !userNameExists*/) {
+                user.value = user.value.copy(firstName = firstName)
+                user.value = user.value.copy(lastName = lastName)
+                user.value = user.value.copy(password = password)
+                user.value = user.value.copy(userName = userName)
+                user.value = user.value.copy(email = email)
                 vmAccounts.addUser(user.value)
                 nav.popBackStack()
 //                nav.navigate(Routes.MainPage.route)

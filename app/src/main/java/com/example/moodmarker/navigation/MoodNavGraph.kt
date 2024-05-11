@@ -51,12 +51,13 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
 
         composable(Routes.CreateAccount.route){
             val users by vmAccounts.userList
-//            val User = null
+//            var user = User(0, "", "", "", "", "")
             CreateAccount(
                 users = users,
                 nav = navController,
                 vmAccounts,
                 emptyUser = vmAccounts.getEmptyUser(),
+
 //                user = User,
                 )
         }
