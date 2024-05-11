@@ -37,9 +37,12 @@ import com.example.moodmarker.ui.theme.components.LoginFields
 @Composable
 fun CreateAccount(
     users: List<User>,
-    nav: NavHostController
+    nav: NavHostController,
+    vmAccounts: AccountsViewModel,
+    emptyUser: User
+//    user: User
 ) {
-
+    val user = remember { mutableStateOf(emptyUser)}
 
     val (firstName, onFirstNameChange) = rememberSaveable { mutableStateOf("") }
     val (lastName, onLastNameChange) = rememberSaveable { mutableStateOf("") }
@@ -49,6 +52,7 @@ fun CreateAccount(
     val (userName, onUserNameChange) = rememberSaveable { mutableStateOf("") }
 
     var arePasswordsSame by remember { mutableStateOf(false) }
+    var userNameExists by remember { mutableStateOf(false) }
     val areFieldsEmpty = firstName.isNotEmpty() && password.isNotEmpty() && lastName.isNotEmpty() && confirmPassword.isNotEmpty() && email.isNotEmpty() && userName.isNotEmpty()
 
     Column(
@@ -60,6 +64,10 @@ fun CreateAccount(
     ) {
         AnimatedVisibility(arePasswordsSame) {
             Text("Passwords Are Not the Same", color = MaterialTheme.colorScheme.error)
+        }
+
+        AnimatedVisibility(userNameExists) {
+            Text("Username Already Exists", color = MaterialTheme.colorScheme.error)
         }
 
         /** Create Account Header Text **/
@@ -140,9 +148,15 @@ fun CreateAccount(
 
         /** Submit Button **/
         Button(onClick = {
+
+            /** TODO Fix Signup Verification **/
             arePasswordsSame = password != confirmPassword
-            if(!arePasswordsSame) {
-                nav.navigate(Routes.MainPage.route)
+            userNameExists = users.any{ it.userName == userName }
+            if(!arePasswordsSame && !userNameExists) {
+
+                vmAccounts.addUser(user.value)
+                nav.popBackStack()
+//                nav.navigate(Routes.MainPage.route)
             }
             }, modifier = Modifier.fillMaxWidth(), enabled = areFieldsEmpty ) {
             Text("Submit", fontSize = 5.em)

@@ -11,7 +11,9 @@ import com.example.moodmarker.db.IMoodMarkerRepository
 import com.example.moodmarker.db.MoodMarkerRepository
 import com.example.moodmarker.db.entities.MoodMarker
 import com.example.moodmarker.db.entities.User
+import com.example.moodmarker.moodEntries.EmotionType
 import kotlinx.coroutines.launch
+import java.util.Date
 
 class AccountsViewModel(app: Application): AndroidViewModel(app) {
     private val _userList: MutableState<List<User>> = mutableStateOf(listOf())
@@ -23,6 +25,8 @@ class AccountsViewModel(app: Application): AndroidViewModel(app) {
     val showDialog: State<Boolean>
     private var _isEdit: Boolean = false
 
+    private var _emptyUser: User
+
     init {
         viewModelScope.launch {
             _userList.value = _repository.getUsers()
@@ -30,6 +34,8 @@ class AccountsViewModel(app: Application): AndroidViewModel(app) {
         _userToBeDeleted = null
         _showDialog = mutableStateOf(false)
         showDialog = _showDialog
+
+        _emptyUser  = User(0, "", "", "", "", "")
     }
 
     fun getUsers(): List<User>{
@@ -91,6 +97,13 @@ class AccountsViewModel(app: Application): AndroidViewModel(app) {
         return _isEdit
     }
 
+    fun setEmptyUser(user: User) {
+        _emptyUser = user
+    }
+
+    fun getEmptyUser(): User {
+        return _emptyUser
+    }
 }
 
 

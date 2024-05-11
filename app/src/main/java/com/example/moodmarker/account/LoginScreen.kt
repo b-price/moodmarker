@@ -1,5 +1,6 @@
 package com.example.moodmarker.account
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,8 +19,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -36,19 +40,17 @@ import com.example.moodmarker.ui.theme.components.LoginFields
 @Composable
 fun LoginPage(
     users: List<User>,
-    nav: NavHostController
-
+    nav: NavHostController,
+    //getLoginInfo: KFunction2<String, String, Unit>
 ) {
     //TODO: Implement login w/credentials
     val (userName, setUserName) = rememberSaveable { mutableStateOf("") }
     val (password, setPassword) = rememberSaveable { mutableStateOf("") }
     val (rememberMe, setRememberMe) = rememberSaveable { mutableStateOf(false) }
 
+    var correctPassword by remember { mutableStateOf(false) }
+    var userNameExists by remember { mutableStateOf(false) }
     val areFieldsEmpty = userName.isNotEmpty() && password.isNotEmpty()
-
-//    val emojiList = listOf("😁", "😡", "🙁", "🙂", "😐")
-//    val randomEmojiOne = emojiList.shuffled().take(1)[0]
-//    val randomEmojiTwo = emojiList.shuffled().take(1)[0]
 
     Column(
         modifier = Modifier
@@ -56,7 +58,14 @@ fun LoginPage(
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        
+        AnimatedVisibility(correctPassword) {
+            Text("That password is incorrect", color = MaterialTheme.colorScheme.error)
+        }
+
+        AnimatedVisibility(userNameExists) {
+            Text("That username does not exist", color = MaterialTheme.colorScheme.error)
+        }
+
         /** Login Header Text **/
         Text(
             text = "Login",
@@ -104,18 +113,22 @@ fun LoginPage(
         Spacer(modifier = Modifier.height(10.dp))
 
 
-//        /** Login and Signup Buttons **/
-//        Row (modifier = Modifier.padding(50.dp), verticalAlignment = Alignment.CenterVertically){
-//            Button(onClick = { nav.navigate(Routes.MainPage.route) }, modifier = Modifier.padding(10.dp) ) {
-//                Text("Login", fontSize = 5.em, modifier = Modifier.padding(5.dp))
-//            }
-//            Button(onClick = { nav.navigate(Routes.CreateAccount.route) }) {
-//                Text("Signup", fontSize = 5.em, modifier = Modifier.padding(5.dp))
-//            }
-//        }
-
         /** Login Button **/
-        Button(onClick = { nav.navigate(Routes.MainPage.route) }, modifier = Modifier.fillMaxWidth(), enabled = areFieldsEmpty ) {
+        Button(
+            onClick = {
+                /** TODO Fix Login Verification **/
+                correctPassword = users.any{ it.password != password }
+                userNameExists = users.any{ it.userName != userName }
+                if(!userNameExists) {
+                    if(!correctPassword) {
+                        nav.navigate("mainPage")
+                    }
+
+//                nav.navigate(Routes.MainPage.route)
+                }
+                 },
+            modifier = Modifier.fillMaxWidth(),
+            enabled = areFieldsEmpty ) {
                 Text("Login", fontSize = 5.em)
         }
         Spacer(modifier = Modifier.height(10.dp))
@@ -141,13 +154,17 @@ fun LoginPage(
                 Text("Sign Up")
             }
         }
-
-
-
-
-
-
     }
 
 }
 
+
+//        /** Login and Signup Buttons **/
+//        Row (modifier = Modifier.padding(50.dp), verticalAlignment = Alignment.CenterVertically){
+//            Button(onClick = { nav.navigate(Routes.MainPage.route) }, modifier = Modifier.padding(10.dp) ) {
+//                Text("Login", fontSize = 5.em, modifier = Modifier.padding(5.dp))
+//            }
+//            Button(onClick = { nav.navigate(Routes.CreateAccount.route) }) {
+//                Text("Signup", fontSize = 5.em, modifier = Modifier.padding(5.dp))
+//            }
+//        }

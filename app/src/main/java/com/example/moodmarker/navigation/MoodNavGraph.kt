@@ -20,6 +20,7 @@ import com.example.moodmarker.account.vms.LoginViewModel
 import com.example.moodmarker.account.ProfilePage
 import com.example.moodmarker.account.vms.ProfileViewModel
 import com.example.moodmarker.account.Settings
+import com.example.moodmarker.db.entities.User
 import com.example.moodmarker.moodEntries.Entries
 import com.example.moodmarker.moodEntries.EntriesViewModel
 import com.example.moodmarker.moodEntries.MarkMyMood
@@ -42,13 +43,22 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
             val users by vmAccounts.userList
             LoginPage(
                 users = users,
-                nav = navController)
+                nav = navController,
+//                getLoginInfo = vmAccounts::getLoginInfo
+//                vmAccounts::setEmptyUser
+            )
         }
 
         composable(Routes.CreateAccount.route){
             val users by vmAccounts.userList
-            CreateAccount(users = users,
-                nav = navController)
+//            val User = null
+            CreateAccount(
+                users = users,
+                nav = navController,
+                vmAccounts,
+                emptyUser = vmAccounts.getEmptyUser(),
+//                user = User,
+                )
         }
 
         composable(Routes.MainPage.route){
