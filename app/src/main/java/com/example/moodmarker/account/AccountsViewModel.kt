@@ -25,17 +25,22 @@ class AccountsViewModel(app: Application): AndroidViewModel(app) {
     val showDialog: State<Boolean>
     private var _isEdit: Boolean = false
 
+
+    private var _exists: Boolean = false
+
     private var _emptyUser: User
 
     init {
         viewModelScope.launch {
             _userList.value = _repository.getUsers()
+
         }
         _userToBeDeleted = null
         _showDialog = mutableStateOf(false)
         showDialog = _showDialog
 
         _emptyUser  = User(0, "", "", "", "", "")
+
     }
 
     fun getUsers(): List<User>{
@@ -78,6 +83,18 @@ class AccountsViewModel(app: Application): AndroidViewModel(app) {
             _repository.getLoginInfo(userName, password)
         }
     }
+
+
+//    suspend fun userExists(userName: String){
+//        _repository.userExists(userName)
+//    }
+    fun userExists(userName: String){
+        viewModelScope.launch {
+            _repository.userExists(userName)
+        }
+    }
+
+
 
     fun dismissDialog() {
         _userToBeDeleted = null

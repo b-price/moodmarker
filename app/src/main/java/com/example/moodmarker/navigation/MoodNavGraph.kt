@@ -14,13 +14,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.moodmarker.account.AccountsViewModel
 import com.example.moodmarker.account.CreateAccount
-import com.example.moodmarker.account.vms.CreateAccountViewModel
 import com.example.moodmarker.account.LoginPage
-import com.example.moodmarker.account.vms.LoginViewModel
 import com.example.moodmarker.account.ProfilePage
-import com.example.moodmarker.account.vms.ProfileViewModel
 import com.example.moodmarker.account.Settings
-import com.example.moodmarker.db.entities.User
 import com.example.moodmarker.moodEntries.Entries
 import com.example.moodmarker.moodEntries.EntriesViewModel
 import com.example.moodmarker.moodEntries.MarkMyMood
@@ -44,21 +40,17 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
             LoginPage(
                 users = users,
                 nav = navController,
-//                getLoginInfo = vmAccounts::getLoginInfo
-//                vmAccounts::setEmptyUser
             )
         }
 
         composable(Routes.CreateAccount.route){
             val users by vmAccounts.userList
-//            var user = User(0, "", "", "", "", "")
             CreateAccount(
                 users = users,
                 nav = navController,
                 vmAccounts,
                 emptyUser = vmAccounts.getEmptyUser(),
 
-//                user = User,
                 )
         }
 

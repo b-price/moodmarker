@@ -31,5 +31,5 @@ interface IMoodMarkerRepository {
 
     suspend fun getLoginInfo(userName: String, password: String): User
 
-
+    suspend fun userExists(userName:String): Boolean
 }

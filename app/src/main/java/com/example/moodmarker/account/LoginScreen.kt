@@ -117,15 +117,14 @@ fun LoginPage(
         Button(
             onClick = {
                 /** TODO Fix Login Verification **/
-                correctPassword = users.any{ it.password != password }
-                userNameExists = users.any{ it.userName != userName }
-                if(!userNameExists) {
-                    if(!correctPassword) {
-                        nav.navigate("mainPage")
-                    }
-
-//                nav.navigate(Routes.MainPage.route)
-                }
+//                correctPassword = users.any{ it.password != password }
+//                userNameExists = users.any{ it.userName != userName }
+//                if(!userNameExists) {
+//                    if(!correctPassword) {
+//                        nav.navigate("mainPage")
+//                    }
+//                }
+                nav.navigate(Routes.MainPage.route)
                  },
             modifier = Modifier.fillMaxWidth(),
             enabled = areFieldsEmpty ) {

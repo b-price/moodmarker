@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.em
 import com.example.moodmarker.db.entities.User
 import com.example.moodmarker.navigation.Routes
 import com.example.moodmarker.ui.theme.components.LoginFields
+import kotlin.reflect.KSuspendFunction1
 
 @Composable
 fun CreateAccount(
@@ -40,8 +41,6 @@ fun CreateAccount(
     nav: NavHostController,
     vmAccounts: AccountsViewModel,
     emptyUser: User,
-
-//    user: User
 ) {
     var user = remember { mutableStateOf(emptyUser)}
 
@@ -151,13 +150,18 @@ fun CreateAccount(
         Button(onClick = {
             arePasswordsSame = password != confirmPassword
             /** TODO Fix Signup Verification **/
+//            val a = vmAccounts.userExists(userName)
+
 //            userNameExists = users.any{ it.userName == user.value.userName }
-            if(!arePasswordsSame /*&& !userNameExists*/) {
+            if(!arePasswordsSame) {
                 user.value = user.value.copy(firstName = firstName)
                 user.value = user.value.copy(lastName = lastName)
                 user.value = user.value.copy(password = password)
                 user.value = user.value.copy(userName = userName)
                 user.value = user.value.copy(email = email)
+//                if() {
+//
+//                }
                 vmAccounts.addUser(user.value)
                 nav.popBackStack()
 //                nav.navigate(Routes.MainPage.route)

@@ -56,4 +56,8 @@ class MoodMarkerRepository(app: Application) : IMoodMarkerRepository {
         return db.usersDao().getLoginInfo(userName = userName, password = password)
     }
 
+    override suspend fun userExists(userName:String): Boolean{
+        return db.usersDao().userExists(userName)
+    }
+
 }

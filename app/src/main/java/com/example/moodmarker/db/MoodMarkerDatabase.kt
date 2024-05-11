@@ -44,6 +44,8 @@ interface UsersDao {
     @Query("SELECT * FROM users WHERE userName LIKE :userName AND password LIKE :password")
     suspend fun getLoginInfo(userName: String, password: String): User
 
+    @Query("SELECT EXISTS (SELECT 1 FROM users WHERE userName LIKE :userName)")
+    suspend fun userExists(userName:String): Boolean
 }
 
 
