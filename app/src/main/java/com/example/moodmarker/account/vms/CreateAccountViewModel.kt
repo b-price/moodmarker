@@ -27,4 +27,22 @@ class CreateAccountViewModel(app: Application): AndroidViewModel(app) {
 
 
 
+    fun userExists(userName: String){
+        viewModelScope.launch {
+            _repository.userExists(userName)
+        }
+    }
+
+    fun getUsers(): List<User>{
+        return _userList.value
+    }
+
+    fun addUser(user: User){
+        viewModelScope.launch {
+            _repository.addUser(user)
+            _userList.value = _repository.getUsers()
+        }
+    }
+
+
 }

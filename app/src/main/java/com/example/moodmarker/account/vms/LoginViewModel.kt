@@ -27,5 +27,15 @@ class LoginViewModel(app: Application): AndroidViewModel(app) {
         }
     }
 
+    fun getUsers(): List<User>{
+        return _userList.value
+    }
+
+    fun getLoginInfo(userName: String, password: String){
+        viewModelScope.launch {
+            _repository.getLoginInfo(userName, password)
+        }
+    }
+
 
 }
