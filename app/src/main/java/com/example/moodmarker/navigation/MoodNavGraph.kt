@@ -13,7 +13,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.moodmarker.account.AccountsViewModel
+import com.example.moodmarker.account.ChangePassword
 import com.example.moodmarker.account.CreateAccount
+import com.example.moodmarker.account.EditProfile
 import com.example.moodmarker.account.LoginPage
 import com.example.moodmarker.account.ProfilePage
 import com.example.moodmarker.account.Settings
@@ -30,13 +32,14 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
 //    val vmCA: CreateAccountViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
 //    val vmP: ProfileViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
 
+    val users by vmAccounts.userList
+
     NavHost(
         navController = navController,
         startDestination = Routes.LoginPage.route,
         modifier = Modifier.padding(paddingValues)
     ){
         composable(Routes.LoginPage.route){
-            val users by vmAccounts.userList
             LoginPage(
                 users = users,
                 nav = navController,
@@ -44,7 +47,6 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
         }
 
         composable(Routes.CreateAccount.route){
-            val users by vmAccounts.userList
             CreateAccount(
                 users = users,
                 nav = navController,
@@ -68,7 +70,6 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
         }
 
         composable(Routes.Favorites.route){
-
             val showDialog by vm.showDialog
             Entries(
                 entries = vm.getFavorites(),
@@ -104,7 +105,6 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
         }
 
         composable(Routes.ProfilePage.route){
-            val users by vmAccounts.userList
             ProfilePage(
                 users = users,
                 nav = navController)
@@ -113,6 +113,25 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
         composable(Routes.AppSettings.route){
             /* TODO: Settings */
         }
+
+        composable(Routes.ChangePassword.route){
+            ChangePassword(
+                users = users,
+                nav = navController,
+                vmAccounts,
+                emptyUser = vmAccounts.getEmptyUser(),
+            )
+        }
+
+        composable(Routes.EditProfile.route){
+            EditProfile(
+                users = users,
+                nav = navController,
+                vmAccounts,
+                emptyUser = vmAccounts.getEmptyUser(),
+            )
+        }
+
     }
 
 }

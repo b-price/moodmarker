@@ -37,6 +37,8 @@ import com.example.moodmarker.db.entities.User
 import com.example.moodmarker.navigation.Routes
 import com.example.moodmarker.ui.theme.components.LoginFields
 
+
+
 @Composable
 fun LoginPage(
     users: List<User>,
@@ -124,7 +126,7 @@ fun LoginPage(
 //                        nav.navigate("mainPage")
 //                    }
 //                }
-                nav.navigate(Routes.MainPage.route)
+                nav.navigate("mainPage")
                  },
             modifier = Modifier.fillMaxWidth(),
             enabled = areFieldsEmpty ) {
@@ -134,7 +136,9 @@ fun LoginPage(
 
 
         /** Forgot Password Button **/
-        TextButton(onClick = {}) {
+        TextButton(onClick = {
+            nav.navigate("changePassword")}
+        ) {
             Text("Forgot Password?")
         }
         Spacer(modifier = Modifier.height(10.dp))
@@ -149,7 +153,7 @@ fun LoginPage(
             ) {
             Text("Don't have an account?")
             Spacer(Modifier.height(8.dp))
-            TextButton(onClick = { nav.navigate(Routes.CreateAccount.route) }) {
+            TextButton(onClick = { nav.navigate("createAccount") }) {
                 Text("Sign Up")
             }
         }

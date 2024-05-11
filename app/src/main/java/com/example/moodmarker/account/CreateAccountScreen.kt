@@ -181,7 +181,7 @@ fun CreateAccount(
         ) {
             Text("Already Have an Account?")
             Spacer(Modifier.height(8.dp))
-            TextButton(onClick = { nav.navigate(Routes.LoginPage.route) }) {
+            TextButton(onClick = { nav.navigate("loginPage") }) {
                 Text("Login")
             }
         }

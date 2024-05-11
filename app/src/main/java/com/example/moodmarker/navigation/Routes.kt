@@ -10,4 +10,7 @@ sealed class Routes(val route: String) {
     object AppSettings : Routes("appSettings")
     object LoginPage : Routes("loginPage")
     object CreateAccount : Routes("createAccount")
+    object ChangePassword : Routes("changePassword")
+    object EditProfile : Routes("editProfile")
+
 }
