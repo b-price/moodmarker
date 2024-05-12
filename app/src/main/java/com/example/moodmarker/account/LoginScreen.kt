@@ -44,7 +44,8 @@ import com.example.moodmarker.ui.theme.components.LoginFields
 fun LoginPage(
     users: List<User>,
     nav: NavHostController,
-    enteredUsername: MutableState<String>
+    enteredUsername: MutableState<String>,
+    enteredUser: User,
     //getLoginInfo: KFunction2<String, String, Unit>
 ) {
     //TODO: Implement login w/credentials
@@ -120,17 +121,13 @@ fun LoginPage(
         /** Login Button **/
         Button(
             onClick = {
-                /** TODO Fix Login Verification **/
-//                correctPassword = users.any{ it.password != password }
-//                userNameExists = users.any{ it.userName != userName }
-//                if(!userNameExists) {
-//                    if(!correctPassword) {
-//                        nav.navigate("mainPage")
-//                    }
-//                }
-                enteredUsername.value = userName
-                nav.navigate("mainPage")
-                 },
+                /** TODO Fix Login Verification w/ Database **/
+                correctPassword = password != enteredUser.password
+                userNameExists = (enteredUser.userName == "" || userName != enteredUser.userName)
+                if(!userNameExists && !correctPassword){
+                    nav.navigate("mainPage")
+                }
+            },
             modifier = Modifier.fillMaxWidth(),
             enabled = areFieldsEmpty ) {
                 Text("Login", fontSize = 5.em)

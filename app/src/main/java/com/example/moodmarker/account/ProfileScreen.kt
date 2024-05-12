@@ -51,7 +51,7 @@ fun ProfilePage(
         Row(){
             /** Profile Screen Header Text **/
             Text(
-                text = enteredUsername.value,
+                text = enteredUser.userName,
                 style = MaterialTheme.typography.displayMedium,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier

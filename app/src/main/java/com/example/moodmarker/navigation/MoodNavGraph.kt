@@ -47,8 +47,8 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
             LoginPage(
                 users = users,
                 nav = navController,
-                enteredUsername = enteredUsername
-
+                enteredUsername = enteredUsername,
+                enteredUser = vmAccounts.getEnteredUser(),
             )
         }
 

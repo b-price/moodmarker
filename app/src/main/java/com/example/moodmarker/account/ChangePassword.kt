@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -42,10 +44,11 @@ fun ChangePassword(
     enteredUser: User,
 ) {
 
-    val (password, onPasswordChange) = rememberSaveable { mutableStateOf(enteredUser.password) }
+    val (userName, setUserName) = rememberSaveable { mutableStateOf("") }
+    val (password, onPasswordChange) = rememberSaveable { mutableStateOf("") }
     val (confirmPassword, onConfirmPasswordChange) = rememberSaveable { mutableStateOf("") }
 
-
+    var correctPassword by remember { mutableStateOf(false) }
     var arePasswordsSame by remember { mutableStateOf(false) }
     var userNameExists by remember { mutableStateOf(false) }
     val areFieldsEmpty = password.isNotEmpty() && confirmPassword.isNotEmpty()
@@ -60,6 +63,20 @@ fun ChangePassword(
         AnimatedVisibility(arePasswordsSame) {
             Text("Passwords Are Not the Same", color = MaterialTheme.colorScheme.error)
         }
+        AnimatedVisibility(userNameExists) {
+            Text("That username does not exist", color = MaterialTheme.colorScheme.error)
+        }
+
+        /** Username Login Field **/
+        LoginFields(
+            value = userName,
+            onValueChange = setUserName,
+            labelText = "Username",
+            leadingIcon = Icons.Default.Person,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
 
         /** Password Change Password Field **/
         LoginFields(
@@ -87,9 +104,11 @@ fun ChangePassword(
         /** Submit Button **/
         Button(onClick = {
 
+            /** TODO Fix Change Password w/ Database **/
+            userNameExists = (enteredUser.userName == "" || userName != enteredUser.userName)
             arePasswordsSame = password != confirmPassword
 
-            if(!arePasswordsSame) {
+            if(!userNameExists && !arePasswordsSame) {
 
                 enteredUser.password = password
 
