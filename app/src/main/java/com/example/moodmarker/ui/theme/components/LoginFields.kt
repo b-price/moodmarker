@@ -22,7 +22,7 @@ fun LoginFields(
     value:String,
     onValueChange:(String) -> Unit,
     labelText:String,
-    leadingIcon: ImageVector? = null,
+    trailingIcon: ImageVector? = null,
     keyboardType: KeyboardType = KeyboardType.Text,
     visualTransformation: VisualTransformation = VisualTransformation.None
 
@@ -36,6 +36,6 @@ fun LoginFields(
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType, imeAction = ImeAction.Done),
         visualTransformation = visualTransformation,
         shape = RoundedCornerShape(50   ),
-        leadingIcon = {if (leadingIcon != null) Icon(imageVector = leadingIcon, null) }
+        trailingIcon = {if (trailingIcon != null) Icon(imageVector = trailingIcon, null) }
     )
 }

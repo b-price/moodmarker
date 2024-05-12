@@ -31,11 +31,11 @@ fun Settings(nav: NavHostController) {
             }
         }
 
-        Row (modifier = Modifier.padding(50.dp), verticalAlignment = Alignment.CenterVertically){
-            Button(onClick = { nav.navigate(Routes.AppSettings.route) }) {
-                Text("App Settings", fontSize = 7.em, modifier = Modifier.padding(10.dp))
-            }
-        }
+//        Row (modifier = Modifier.padding(50.dp), verticalAlignment = Alignment.CenterVertically){
+//            Button(onClick = { nav.navigate(Routes.AppSettings.route) }) {
+//                Text("App Settings", fontSize = 7.em, modifier = Modifier.padding(10.dp))
+//            }
+//        }
 
         Row (modifier = Modifier.padding(50.dp), verticalAlignment = Alignment.CenterVertically){
             Button(onClick = { nav.navigate(Routes.LoginPage.route) }) {

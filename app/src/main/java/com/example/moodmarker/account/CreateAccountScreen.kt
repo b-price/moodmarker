@@ -11,10 +11,17 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,6 +39,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.em
 import com.example.moodmarker.db.entities.User
 import com.example.moodmarker.navigation.Routes
@@ -51,6 +59,9 @@ fun CreateAccount(
     val (password, onPasswordChange) = rememberSaveable { mutableStateOf("") }
     val (confirmPassword, onConfirmPasswordChange) = rememberSaveable { mutableStateOf("") }
     val (userName, onUserNameChange) = rememberSaveable { mutableStateOf("") }
+
+    var passwordVisibility by remember { mutableStateOf(false) }
+    var confirmPasswordVisibility by remember { mutableStateOf(false) }
 
     var arePasswordsSame by remember { mutableStateOf(false) }
     var userNameExists by remember { mutableStateOf(false) }
@@ -124,25 +135,48 @@ fun CreateAccount(
 
 
         /** Password Create Account Field **/
-        LoginFields(
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
             value = password,
             onValueChange = onPasswordChange,
-            labelText = "Password",
-            modifier = Modifier.fillMaxWidth(),
-            visualTransformation = PasswordVisualTransformation(),
-            keyboardType = KeyboardType.Password
+            singleLine = true,
+            label = { Text(text = "Password") },
+            shape = RoundedCornerShape(50),
+            visualTransformation = if (passwordVisibility) { VisualTransformation.None } else { PasswordVisualTransformation() },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            trailingIcon = {
+                if (passwordVisibility) {
+                    IconButton(onClick = { passwordVisibility = false }) {
+                        Icon(imageVector = Icons.Filled.Visibility, contentDescription = "") }
+                } else {
+                    IconButton(onClick = { passwordVisibility = true }) {
+                        Icon(imageVector = Icons.Filled.VisibilityOff, contentDescription = "") }
+                }
+            }
         )
         Spacer(Modifier.height(10.dp))
 
 
         /** Confirm Password Create Account Field **/
-        LoginFields(
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
             value = confirmPassword,
             onValueChange = onConfirmPasswordChange,
-            labelText = "Confirm Password",
-            modifier = Modifier.fillMaxWidth(),
-            visualTransformation = PasswordVisualTransformation(),
-            keyboardType = KeyboardType.Password,
+            singleLine = true,
+            label = { Text(text = "Confirm Password") },
+            shape = RoundedCornerShape(50),
+            visualTransformation = if (confirmPasswordVisibility) { VisualTransformation.None } else { PasswordVisualTransformation() },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            trailingIcon = {
+                if (confirmPasswordVisibility) {
+                    IconButton(onClick = { confirmPasswordVisibility = false }) {
+                        Icon(imageVector = Icons.Filled.Visibility, contentDescription = "") }
+                } else {
+                    IconButton(
+                        onClick = { confirmPasswordVisibility = true }) {
+                        Icon(imageVector = Icons.Filled.VisibilityOff, contentDescription = "") }
+                }
+            }
         )
         Spacer(Modifier.height(20.dp))
 
@@ -184,58 +218,5 @@ fun CreateAccount(
                 Text("Login")
             }
         }
-//        Row(modifier = Modifier
-//            .fillMaxWidth()
-//            .padding(start = 4.dp, end = 4.dp),
-//            verticalAlignment = Alignment.CenterVertically
-//        ){
-//            Text(text = "Name", modifier = Modifier.width(100.dp))
-//            TextField(
-//                value = name.value,
-//                onValueChange = { name.value = it }
-//            )
-//        }
-//
-//        Row(modifier = Modifier
-//            .fillMaxWidth()
-//            .padding(start = 4.dp, end = 4.dp),
-//            verticalAlignment = Alignment.CenterVertically
-//        ){
-//            Text(text = "UserName", modifier = Modifier.width(100.dp))
-//            TextField(
-//                value = userName.value,
-//                onValueChange = { userName.value = it }
-//            )
-//        }
-//
-//        Row(modifier = Modifier
-//            .fillMaxWidth()
-//            .padding(start = 4.dp, end = 4.dp),
-//            verticalAlignment = Alignment.CenterVertically
-//        ){
-//            Text(text = "Password", modifier = Modifier.width(100.dp))
-//            TextField(
-//                value = password.value,
-//                onValueChange = { password.value = it }
-//            )
-//        }
-//
-//        Row (modifier = Modifier.padding(50.dp), verticalAlignment = Alignment.CenterVertically){
-//            Button(onClick = { nav.navigate(Routes.MainPage.route) }, modifier = Modifier.padding(10.dp) ) {
-//                Text("Submit", fontSize = 5.em, modifier = Modifier.padding(8.dp))
-//            }
-//            Button(onClick = { nav.navigate(Routes.LoginPage.route) }) {
-//                Text("Cancel", fontSize = 5.em, modifier = Modifier.padding(8.dp))
-//            }
-//        }
-//
-//
-
-
     }
-
-
-
-
-
 }

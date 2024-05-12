@@ -11,11 +11,18 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -28,6 +35,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.navigation.NavHostController
@@ -47,6 +55,9 @@ fun ChangePassword(
     val (userName, setUserName) = rememberSaveable { mutableStateOf("") }
     val (password, onPasswordChange) = rememberSaveable { mutableStateOf("") }
     val (confirmPassword, onConfirmPasswordChange) = rememberSaveable { mutableStateOf("") }
+
+    var passwordVisibility by remember { mutableStateOf(false) }
+    var confirmPasswordVisibility by remember { mutableStateOf(false) }
 
     var correctPassword by remember { mutableStateOf(false) }
     var arePasswordsSame by remember { mutableStateOf(false) }
@@ -78,25 +89,48 @@ fun ChangePassword(
 
 
         /** Password Change Password Field **/
-        LoginFields(
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
             value = password,
             onValueChange = onPasswordChange,
-            labelText = "Password",
-            modifier = Modifier.fillMaxWidth(),
-            visualTransformation = PasswordVisualTransformation(),
-            keyboardType = KeyboardType.Password
+            singleLine = true,
+            label = { Text(text = "Password") },
+            shape = RoundedCornerShape(50),
+            visualTransformation = if (passwordVisibility) { VisualTransformation.None } else { PasswordVisualTransformation() },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            trailingIcon = {
+                if (passwordVisibility) {
+                    IconButton(onClick = { passwordVisibility = false }) {
+                        Icon(imageVector = Icons.Filled.Visibility, contentDescription = "") }
+                } else {
+                    IconButton(onClick = { passwordVisibility = true }) {
+                        Icon(imageVector = Icons.Filled.VisibilityOff, contentDescription = "") }
+                }
+            }
         )
         Spacer(Modifier.height(10.dp))
 
 
         /** Confirm Password Change Password Field **/
-        LoginFields(
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
             value = confirmPassword,
             onValueChange = onConfirmPasswordChange,
-            labelText = "Confirm Password",
-            modifier = Modifier.fillMaxWidth(),
-            visualTransformation = PasswordVisualTransformation(),
-            keyboardType = KeyboardType.Password
+            singleLine = true,
+            label = { Text(text = "Confirm Password") },
+            shape = RoundedCornerShape(50),
+            visualTransformation = if (confirmPasswordVisibility) { VisualTransformation.None } else { PasswordVisualTransformation() },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            trailingIcon = {
+                if (confirmPasswordVisibility) {
+                    IconButton(onClick = { confirmPasswordVisibility = false }) {
+                        Icon(imageVector = Icons.Filled.Visibility, contentDescription = "") }
+                } else {
+                    IconButton(
+                        onClick = { confirmPasswordVisibility = true }) {
+                        Icon(imageVector = Icons.Filled.VisibilityOff, contentDescription = "") }
+                }
+            }
         )
         Spacer(Modifier.height(20.dp))
 
