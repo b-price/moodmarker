@@ -48,7 +48,6 @@ fun LoginPage(
     enteredUser: User,
     //getLoginInfo: KFunction2<String, String, Unit>
 ) {
-    //TODO: Implement login w/credentials
     val (userName, setUserName) = rememberSaveable { mutableStateOf("") }
     val (password, setPassword) = rememberSaveable { mutableStateOf("") }
     val (rememberMe, setRememberMe) = rememberSaveable { mutableStateOf(false) }
@@ -121,7 +120,7 @@ fun LoginPage(
         /** Login Button **/
         Button(
             onClick = {
-                /** TODO Fix Login Verification w/ Database **/
+                /** TODO Fix Login Verification credentials w/ Database **/
                 correctPassword = password != enteredUser.password
                 userNameExists = (enteredUser.userName == "" || userName != enteredUser.userName)
                 if(!userNameExists && !correctPassword){

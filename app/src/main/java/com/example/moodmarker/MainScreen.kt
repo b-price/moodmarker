@@ -19,6 +19,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -34,9 +37,21 @@ import com.example.moodmarker.navigation.Routes
 @Composable
 fun MainScreen() {
     val nav = rememberNavController()
+
+    var showBottomBar by rememberSaveable { mutableStateOf(true) }
+    val navBackStackEntry by nav.currentBackStackEntryAsState()
+
+    /** Toggle for bottom bar **/
+    showBottomBar = when (navBackStackEntry?.destination?.route) {
+        "loginPage" -> false
+        "createAccount" -> false
+        "changePassword" -> false
+        else -> true
+    }
+
     Scaffold (
         topBar = {TopBar()},
-        bottomBar = { BottomBar(nav = nav)}
+        bottomBar = {if(showBottomBar) BottomBar(nav = nav)}
     ){pv: PaddingValues ->
         MoodNavGraph(navController = nav, pv)
     }
@@ -99,3 +114,4 @@ private fun BottomBar(nav: NavHostController) {
             label = { Text("Settings")})
     }
 }
+

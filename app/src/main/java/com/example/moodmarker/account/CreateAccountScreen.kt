@@ -153,16 +153,6 @@ fun CreateAccount(
 
 //            userNameExists = users.any{ it.userName == user.value.userName }
             if(!arePasswordsSame) {
-//                user.value = user.value.copy(firstName = firstName)
-//                user.value = user.value.copy(lastName = lastName)
-//                user.value = user.value.copy(password = password)
-//                user.value = user.value.copy(userName = userName)
-//                user.value = user.value.copy(email = email)
-//                if() {
-//
-//                }
-
-
                 enteredUser.firstName = firstName
                 enteredUser.lastName = lastName
                 enteredUser.password = password

@@ -35,7 +35,7 @@ import com.example.moodmarker.db.entities.User
 import com.example.moodmarker.ui.theme.components.LoginFields
 
 
-/** TODO Fix Password Update **/
+
 @Composable
 fun ChangePassword(
     users: List<User>,
