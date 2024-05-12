@@ -1,4 +1,4 @@
-package com.example.moodmarker
+package com.example.moodmarker.moodEntries
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -17,6 +17,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.example.moodmarker.quotes.QuoteViewModel
+import com.example.moodmarker.navigation.Routes
+import com.example.moodmarker.db.entities.MoodMarker
 import java.util.Date
 
 @Composable

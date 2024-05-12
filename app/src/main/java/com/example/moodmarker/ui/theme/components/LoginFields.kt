@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,8 +31,9 @@ fun LoginFields(
         modifier = modifier,
         value = value,
         onValueChange = onValueChange,
+        singleLine = true,
         label = { Text(labelText) },
-        keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
+        keyboardOptions = KeyboardOptions(keyboardType = keyboardType, imeAction = ImeAction.Done),
         visualTransformation = visualTransformation,
         shape = RoundedCornerShape(50   ),
         leadingIcon = {if (leadingIcon != null) Icon(imageVector = leadingIcon, null) }

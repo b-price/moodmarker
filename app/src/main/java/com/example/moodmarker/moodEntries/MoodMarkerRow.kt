@@ -1,4 +1,4 @@
-package com.example.moodmarker
+package com.example.moodmarker.moodEntries
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.em
 import androidx.navigation.NavHostController
+import com.example.moodmarker.db.entities.MoodMarker
 
 @Composable
 fun MoodMarkerRow(

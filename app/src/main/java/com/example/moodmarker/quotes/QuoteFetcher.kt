@@ -1,4 +1,4 @@
-package com.example.moodmarker
+package com.example.moodmarker.quotes
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

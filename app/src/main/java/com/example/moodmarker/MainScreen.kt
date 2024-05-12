@@ -19,6 +19,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -27,14 +30,28 @@ import androidx.compose.ui.unit.em
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.moodmarker.navigation.MoodNavGraph
+import com.example.moodmarker.navigation.Routes
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainScreen() {
     val nav = rememberNavController()
+
+    var showBottomBar by rememberSaveable { mutableStateOf(true) }
+    val navBackStackEntry by nav.currentBackStackEntryAsState()
+
+    /** Toggle for bottom bar **/
+    showBottomBar = when (navBackStackEntry?.destination?.route) {
+        "loginPage" -> false
+        "createAccount" -> false
+        "changePassword" -> false
+        else -> true
+    }
+
     Scaffold (
         topBar = {TopBar()},
-        bottomBar = { BottomBar(nav = nav)}
+        bottomBar = {if(showBottomBar) BottomBar(nav = nav)}
     ){pv: PaddingValues ->
         MoodNavGraph(navController = nav, pv)
     }
@@ -76,7 +93,7 @@ private fun BottomBar(nav: NavHostController) {
     val currentRoute: String? = currentBackStack?.destination?.route
     NavigationBar {
         NavigationBarItem(
-            selected = currentRoute == Routes.MainPage.route, 
+            selected = currentRoute == Routes.MainPage.route,
             onClick = { nav.navigate(Routes.MainPage.route) },
             icon = { Icon(Icons.Default.Home, "Home")},
             label = { Text("Home")})
@@ -97,3 +114,4 @@ private fun BottomBar(nav: NavHostController) {
             label = { Text("Settings")})
     }
 }
+

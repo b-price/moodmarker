@@ -1,4 +1,4 @@
-package com.example.moodmarker
+package com.example.moodmarker.moodEntries
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.navigation.NavHostController
+import com.example.moodmarker.db.entities.MoodMarker
 import kotlin.reflect.KFunction0
 import kotlin.reflect.KFunction1
 
