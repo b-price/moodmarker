@@ -39,11 +39,10 @@ fun ChangePassword(
     users: List<User>,
     nav: NavHostController,
     vmAccounts: AccountsViewModel,
-    emptyUser: User,
+    enteredUser: User,
 ) {
-    var user = remember { mutableStateOf(emptyUser)}
 
-    val (password, onPasswordChange) = rememberSaveable { mutableStateOf("") }
+    val (password, onPasswordChange) = rememberSaveable { mutableStateOf(enteredUser.password) }
     val (confirmPassword, onConfirmPasswordChange) = rememberSaveable { mutableStateOf("") }
 
 
@@ -92,9 +91,9 @@ fun ChangePassword(
 
             if(!arePasswordsSame) {
 
-                user.value = user.value.copy(password = password)
+                enteredUser.password = password
 
-                vmAccounts.updateUser(user.value)
+                vmAccounts.updateUser(enteredUser)
                 nav.popBackStack()
 
             }

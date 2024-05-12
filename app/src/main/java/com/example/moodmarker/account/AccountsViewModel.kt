@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -27,8 +28,8 @@ class AccountsViewModel(app: Application): AndroidViewModel(app) {
 
 
     private var _exists: Boolean = false
-
     private var _emptyUser: User
+    var _enteredUser: User
 
     init {
         viewModelScope.launch {
@@ -40,6 +41,7 @@ class AccountsViewModel(app: Application): AndroidViewModel(app) {
         showDialog = _showDialog
 
         _emptyUser  = User(0, "", "", "", "", "")
+        _enteredUser = User(0,"","","","","")
 
     }
 
@@ -120,6 +122,14 @@ class AccountsViewModel(app: Application): AndroidViewModel(app) {
 
     fun getEmptyUser(): User {
         return _emptyUser
+    }
+
+    fun setEnteredUser(user: User) {
+        _enteredUser = user
+    }
+
+    fun getEnteredUser(): User {
+        return _enteredUser
     }
 }
 

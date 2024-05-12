@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -40,10 +41,8 @@ fun CreateAccount(
     users: List<User>,
     nav: NavHostController,
     vmAccounts: AccountsViewModel,
-    emptyUser: User,
+    enteredUser: User,
 ) {
-    var user = remember { mutableStateOf(emptyUser)}
-
     val (firstName, onFirstNameChange) = rememberSaveable { mutableStateOf("") }
     val (lastName, onLastNameChange) = rememberSaveable { mutableStateOf("") }
     val (email, onEmailChange) = rememberSaveable { mutableStateOf("") }
@@ -154,15 +153,23 @@ fun CreateAccount(
 
 //            userNameExists = users.any{ it.userName == user.value.userName }
             if(!arePasswordsSame) {
-                user.value = user.value.copy(firstName = firstName)
-                user.value = user.value.copy(lastName = lastName)
-                user.value = user.value.copy(password = password)
-                user.value = user.value.copy(userName = userName)
-                user.value = user.value.copy(email = email)
+//                user.value = user.value.copy(firstName = firstName)
+//                user.value = user.value.copy(lastName = lastName)
+//                user.value = user.value.copy(password = password)
+//                user.value = user.value.copy(userName = userName)
+//                user.value = user.value.copy(email = email)
 //                if() {
 //
 //                }
-                vmAccounts.addUser(user.value)
+
+
+                enteredUser.firstName = firstName
+                enteredUser.lastName = lastName
+                enteredUser.password = password
+                enteredUser.userName = userName
+                enteredUser.email = email
+
+                vmAccounts.addUser(enteredUser)
                 nav.popBackStack()
 //                nav.navigate(Routes.MainPage.route)
             }

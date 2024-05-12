@@ -39,20 +39,18 @@ fun EditProfile(
     users: List<User>,
     nav: NavHostController,
     vmAccounts: AccountsViewModel,
-    emptyUser: User,
-) {
-    var user = remember { mutableStateOf(emptyUser)}
+    enteredUser: User,
 
-    val (firstName, onFirstNameChange) = rememberSaveable { mutableStateOf("") }
-    val (lastName, onLastNameChange) = rememberSaveable { mutableStateOf("") }
-    val (email, onEmailChange) = rememberSaveable { mutableStateOf("") }
-    val (password, onPasswordChange) = rememberSaveable { mutableStateOf("") }
-    val (confirmPassword, onConfirmPasswordChange) = rememberSaveable { mutableStateOf("") }
-    val (userName, onUserNameChange) = rememberSaveable { mutableStateOf("") }
+) {
+
+    val (firstName, onFirstNameChange) = rememberSaveable { mutableStateOf(enteredUser.firstName) }
+    val (lastName, onLastNameChange) = rememberSaveable { mutableStateOf(enteredUser.lastName) }
+    val (email, onEmailChange) = rememberSaveable { mutableStateOf(enteredUser.email) }
+    val (userName, onUserNameChange) = rememberSaveable { mutableStateOf(enteredUser.userName) }
 
     var arePasswordsSame by remember { mutableStateOf(false) }
     var userNameExists by remember { mutableStateOf(false) }
-    val areFieldsEmpty = firstName.isNotEmpty() && password.isNotEmpty() && lastName.isNotEmpty() && confirmPassword.isNotEmpty() && email.isNotEmpty() && userName.isNotEmpty()
+    val areFieldsEmpty = firstName.isNotEmpty() && lastName.isNotEmpty() && email.isNotEmpty() && userName.isNotEmpty()
 
     Column(
         modifier = Modifier
@@ -81,7 +79,7 @@ fun EditProfile(
             labelText = "First Name",
             modifier = Modifier.fillMaxWidth()
         )
-        Spacer(Modifier.height(10.dp))
+        Spacer(Modifier.height(2.dp))
 
 
         /** Last Name Edit Profile Field **/
@@ -91,7 +89,16 @@ fun EditProfile(
             labelText = "Last Name",
             modifier = Modifier.fillMaxWidth()
         )
-        Spacer(Modifier.height(10.dp))
+        Spacer(Modifier.height(2.dp))
+
+        /** Last Name Edit Profile Field **/
+        LoginFields(
+            value = userName,
+            onValueChange = onUserNameChange,
+            labelText = "Username",
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(Modifier.height(2.dp))
 
 
         /** Email Edit Profile Field **/
@@ -101,18 +108,18 @@ fun EditProfile(
             labelText = "Email",
             modifier = Modifier.fillMaxWidth()
         )
-        Spacer(Modifier.height(10.dp))
+        Spacer(Modifier.height(2.dp))
 
 
         /** Submit Button **/
         Button(onClick = {
-                user.value = user.value.copy(firstName = firstName)
-                user.value = user.value.copy(lastName = lastName)
-                user.value = user.value.copy(userName = userName)
-                user.value = user.value.copy(email = email)
+            enteredUser.firstName = firstName
+            enteredUser.lastName = lastName
+            enteredUser.userName = userName
+            enteredUser.email = email
 
-                vmAccounts.updateUser(user.value)
-                nav.popBackStack()
+            vmAccounts.updateUser(enteredUser)
+            nav.popBackStack()
 
         }, modifier = Modifier.fillMaxWidth(), enabled = areFieldsEmpty ) {
             Text("Submit", fontSize = 5.em)

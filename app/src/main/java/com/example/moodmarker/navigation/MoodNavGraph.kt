@@ -21,6 +21,7 @@ import com.example.moodmarker.account.EditProfile
 import com.example.moodmarker.account.LoginPage
 import com.example.moodmarker.account.ProfilePage
 import com.example.moodmarker.account.Settings
+import com.example.moodmarker.db.entities.User
 import com.example.moodmarker.moodEntries.Entries
 import com.example.moodmarker.moodEntries.EntriesViewModel
 import com.example.moodmarker.moodEntries.MarkMyMood
@@ -56,8 +57,7 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
                 users = users,
                 nav = navController,
                 vmAccounts,
-                emptyUser = vmAccounts.getEmptyUser(),
-
+                enteredUser = vmAccounts.getEnteredUser()
                 )
         }
 
@@ -113,7 +113,9 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
             ProfilePage(
                 users = users,
                 nav = navController,
-                enteredUsername = enteredUsername)
+                enteredUsername = enteredUsername,
+                enteredUser = vmAccounts.getEnteredUser()
+                )
 
         }
 
@@ -126,7 +128,7 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
                 users = users,
                 nav = navController,
                 vmAccounts,
-                emptyUser = vmAccounts.getEmptyUser(),
+                enteredUser = vmAccounts.getEnteredUser()
             )
         }
 
@@ -135,7 +137,7 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
                 users = users,
                 nav = navController,
                 vmAccounts,
-                emptyUser = vmAccounts.getEmptyUser(),
+                enteredUser = vmAccounts.getEnteredUser()
             )
         }
 

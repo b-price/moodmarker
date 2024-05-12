@@ -37,12 +37,9 @@ import com.example.moodmarker.navigation.Routes
 fun ProfilePage(
     users: List<User>,
     nav: NavHostController,
-    enteredUsername: MutableState<String>
+    enteredUsername: MutableState<String>,
+    enteredUser: User,
 ) {
-
-    val name = remember { mutableStateOf("") }
-    val userName = remember { mutableStateOf("") }
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -69,48 +66,85 @@ fun ProfilePage(
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier
                     .padding(vertical = 16.dp)
-//                    .align(alignment = Alignment.Start)
+
+                //color = Color.
+            )
+        }
+        Spacer(modifier = Modifier.height(2.dp))
+
+
+        Row(modifier =
+            Modifier.padding(vertical = 16.dp)
+                   .align(alignment = Alignment.Start)){
+            Text(
+                text = "First Name: ",
+                modifier = Modifier
+                //color = Color.
+            )
+            Text(
+                text = enteredUser.firstName,
+                modifier = Modifier
                 //color = Color.
             )
         }
 
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(2.dp))
 
-        Text(
-            text = "First Name: ",
-            modifier = Modifier
-                .padding(vertical = 16.dp)
-                .align(alignment = Alignment.Start)
-            //color = Color.
-        )
-        Spacer(modifier = Modifier.height(10.dp))
 
-        Text(
-            text = "Last Name: ",
-            modifier = Modifier
-                .padding(vertical = 16.dp)
-                .align(alignment = Alignment.Start)
-            //color = Color.
-        )
-        Spacer(modifier = Modifier.height(10.dp))
+        Row(modifier =
+        Modifier.padding(vertical = 16.dp)
+            .align(alignment = Alignment.Start)){
+            Text(
+                text = "Last Name: ",
+                modifier = Modifier
+                //color = Color.
+            )
+            Text(
+                text = enteredUser.lastName,
+                modifier = Modifier
+                //color = Color.
+            )
 
-        Text(
-            text = "Username: ",
-            modifier = Modifier
-                .padding(vertical = 16.dp)
-                .align(alignment = Alignment.Start)
-            //color = Color.
-        )
-        Spacer(modifier = Modifier.height(10.dp))
+        }
 
-        Text(
-            text = "Email: ",
-            modifier = Modifier
-                .padding(vertical = 16.dp)
-                .align(alignment = Alignment.Start)
-            //color = Color.
-        )
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(2.dp))
+
+
+        Row(modifier =
+        Modifier.padding(vertical = 16.dp)
+            .align(alignment = Alignment.Start)){
+            Text(
+                text = "Username: ",
+                modifier = Modifier
+                //color = Color.
+            )
+            Text(
+                text = enteredUser.userName,
+                modifier = Modifier
+                //color = Color.
+            )
+
+        }
+        Spacer(modifier = Modifier.height(2.dp))
+
+
+        Row(modifier =
+        Modifier.padding(vertical = 16.dp)
+            .align(alignment = Alignment.Start)){
+            Text(
+                text = "Email: ",
+                modifier = Modifier
+                //color = Color.
+            )
+            Text(
+                text = enteredUser.email,
+                modifier = Modifier
+                //color = Color.
+            )
+
+        }
+        Spacer(Modifier.height(20.dp))
+
 
         Button(
             onClick = {

@@ -15,19 +15,19 @@ data class User(
 //    val id: UUID = UUID.randomUUID(),
 
     @ColumnInfo(name = "firstName")
-    val firstName : String,
+    var firstName : String,
 
     @ColumnInfo(name = "lastName")
-    val lastName : String,
+    var lastName : String,
 
     @ColumnInfo(name = "userName")
-    val userName : String,
+    var userName : String,
 
     @ColumnInfo(name = "email")
-    val email : String,
+    var email : String,
 
     @ColumnInfo(name = "password")
-    val password : String,
+    var password : String,
 ) {
 
 }
