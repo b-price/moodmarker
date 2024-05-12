@@ -19,6 +19,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -43,6 +44,7 @@ import com.example.moodmarker.ui.theme.components.LoginFields
 fun LoginPage(
     users: List<User>,
     nav: NavHostController,
+    enteredUsername: MutableState<String>
     //getLoginInfo: KFunction2<String, String, Unit>
 ) {
     //TODO: Implement login w/credentials
@@ -126,6 +128,7 @@ fun LoginPage(
 //                        nav.navigate("mainPage")
 //                    }
 //                }
+                enteredUsername.value = userName
                 nav.navigate("mainPage")
                  },
             modifier = Modifier.fillMaxWidth(),

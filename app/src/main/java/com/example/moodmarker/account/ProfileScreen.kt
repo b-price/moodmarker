@@ -25,6 +25,7 @@ import androidx.navigation.NavHostController
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.em
 import com.example.moodmarker.db.entities.User
@@ -35,7 +36,9 @@ import com.example.moodmarker.navigation.Routes
 @Composable
 fun ProfilePage(
     users: List<User>,
-    nav: NavHostController) {
+    nav: NavHostController,
+    enteredUsername: MutableState<String>
+) {
 
     val name = remember { mutableStateOf("") }
     val userName = remember { mutableStateOf("") }
@@ -48,16 +51,29 @@ fun ProfilePage(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        /** Profile Screen Header Text **/
-        Text(
-            text = "Profile",
-            style = MaterialTheme.typography.displayMedium,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier
-                .padding(vertical = 16.dp)
-                .align(alignment = Alignment.Start)
-            //color = Color.
-        )
+        Row(){
+            /** Profile Screen Header Text **/
+            Text(
+                text = enteredUsername.value,
+                style = MaterialTheme.typography.displayMedium,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier
+                    .padding(vertical = 16.dp)
+//                    .align(alignment = Alignment.Start)
+                //color = Color.
+            )
+
+            Text(
+                text = "'s Profile",
+                style = MaterialTheme.typography.displayMedium,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier
+                    .padding(vertical = 16.dp)
+//                    .align(alignment = Alignment.Start)
+                //color = Color.
+            )
+        }
+
         Spacer(modifier = Modifier.height(10.dp))
 
         Text(

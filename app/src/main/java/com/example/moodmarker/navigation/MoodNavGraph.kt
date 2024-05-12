@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -32,6 +34,7 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
 //    val vmCA: CreateAccountViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
 //    val vmP: ProfileViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
 
+    var enteredUsername = rememberSaveable { mutableStateOf("") }
     val users by vmAccounts.userList
 
     NavHost(
@@ -43,6 +46,8 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
             LoginPage(
                 users = users,
                 nav = navController,
+                enteredUsername = enteredUsername
+
             )
         }
 
@@ -107,7 +112,9 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
         composable(Routes.ProfilePage.route){
             ProfilePage(
                 users = users,
-                nav = navController)
+                nav = navController,
+                enteredUsername = enteredUsername)
+
         }
 
         composable(Routes.AppSettings.route){
