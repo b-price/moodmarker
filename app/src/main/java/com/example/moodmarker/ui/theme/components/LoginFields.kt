@@ -31,6 +31,7 @@ fun LoginFields(
         modifier = modifier,
         value = value,
         onValueChange = onValueChange,
+        singleLine = true,
         label = { Text(labelText) },
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType, imeAction = ImeAction.Done),
         visualTransformation = visualTransformation,
