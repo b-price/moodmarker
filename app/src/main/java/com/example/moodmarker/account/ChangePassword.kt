@@ -72,7 +72,6 @@ fun ChangePassword(
             value = userName,
             onValueChange = setUserName,
             labelText = "Username",
-            leadingIcon = Icons.Default.Person,
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(10.dp))
