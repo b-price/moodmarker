@@ -37,34 +37,43 @@ fun MarkMyMood(nav: NavHostController, onPickMood: (MoodMarker) -> Unit) {
             Spacer(modifier = Modifier.height(50.dp))
         }
         Row () {
+            //Emojis representing different emotions
+            //When clicked it preselects the emoji and navigates to the mood card with the radio button preselected with the clicked emotion
             Text("😐",
                 fontSize = 18.em,
                 modifier = Modifier.clickable {
+                    //Picks the neutral mood and navigates to the mood marker card
                     onPickMood(MoodMarker(0, EmotionType.Neutral, "", false, Date().toString()))
                     nav.navigate(Routes.AddMoodMarker.route)
                 }
             )
             Text("🙂", fontSize = 18.em, modifier = Modifier.clickable {
+                //Picks the happy mood and navigates to the mood marker card
                 onPickMood(MoodMarker(0, EmotionType.Happy, "", false, Date().toString()))
                 nav.navigate(Routes.AddMoodMarker.route)
             })
         }
         Row {
             Text("😡", fontSize = 18.em, modifier = Modifier.clickable {
+                //Picks the angry mood and navigates to the mood marker card
                 onPickMood(MoodMarker(0, EmotionType.Angry, "", false, Date().toString()))
                 nav.navigate(Routes.AddMoodMarker.route)
             })
             Text("🙁", fontSize = 18.em, modifier = Modifier.clickable {
+                //Picks the sad mood and navigates to the mood marker card
                 onPickMood(MoodMarker(0, EmotionType.Sad, "", false, Date().toString()))
                 nav.navigate(Routes.AddMoodMarker.route)
             })
             Text("😁", fontSize = 18.em, modifier = Modifier.clickable {
+                //Picks the excited mood and navigates to the mood marker card
                 onPickMood(MoodMarker(0, EmotionType.Excited, "", false, Date().toString()))
                 nav.navigate(Routes.AddMoodMarker.route)
             })
         }
         Row (modifier = Modifier.padding(50.dp)){
+            //Button to mark the daily mood and navigate to the mood marker card
             Button(onClick = {
+                //Default is the happy emotion with a blank daily entry
                 onPickMood(MoodMarker(0, EmotionType.Happy, "", false, Date().toString()))
                 nav.navigate(Routes.AddMoodMarker.route)
             }) {
@@ -74,6 +83,8 @@ fun MarkMyMood(nav: NavHostController, onPickMood: (MoodMarker) -> Unit) {
         Row {
             Spacer(modifier = Modifier.height(100.dp))
         }
+        //Displays a random quote from the zen quotes API
+        //The quote is fetched from the Quote view
         Text(
             text = vm.quote.value ?: "Loading quote...",
             textAlign = TextAlign.Center,

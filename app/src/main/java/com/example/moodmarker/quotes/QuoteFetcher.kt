@@ -7,19 +7,21 @@ import okhttp3.Request
 import org.json.JSONArray
 import android.content.Context
 
-
+//Interface for fetching quotes
 interface IQuoteFetcher {
     suspend fun fetchQuotes(): List<String>
 }
-
+//Implements IQuoteFetcher interface
 class QuotesFetcher (private val context: Context) : IQuoteFetcher {
+    //OkHttpCLient instance for making HTTP requests
     private val client = OkHttpClient()
 
+    //Fetch quotes from the ZenQuotes api
     override suspend fun fetchQuotes(): List<String> {
         return withContext(Dispatchers.IO) {
             val request = Request.Builder()
                 .get()
-                .url("https://type.fit/api/quotes")
+                .url("https://zenquotes.io/api/quotes/")
                 .build()
 
             val response = client.newCall(request).execute()
@@ -31,7 +33,7 @@ class QuotesFetcher (private val context: Context) : IQuoteFetcher {
 
                 for (i in 0 until jsonArray.length()) {
                     val jsonObject = jsonArray.getJSONObject(i)
-                    val quoteText = jsonObject.getString("text")
+                    val quoteText = jsonObject.getString("q")
                     quotes.add(quoteText)
                 }
             }

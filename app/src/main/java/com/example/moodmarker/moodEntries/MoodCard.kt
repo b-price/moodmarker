@@ -57,7 +57,7 @@ fun MoodCard(
     isEdit: () -> Boolean,
     onEdit: KFunction0<Unit>
 ) {
-    val quoteVm: QuoteViewModel = viewModel()
+    //Remember the current mood marker state
     val moodMarker = remember { mutableStateOf(presetMood) }
     // Retrieve the current context using LocalContext.current
     val context = LocalContext.current
@@ -92,7 +92,7 @@ fun MoodCard(
                 moodMarker.value = moodMarker.value.copy(imageURI = imageURI.toString())
             }
         }
-
+    //The MoodCard is inside a rounded corner card
     Card(
         shape = RoundedCornerShape(5.dp),
         modifier = Modifier
@@ -107,6 +107,7 @@ fun MoodCard(
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically
             ){
+                //Display an emoji based on the selected emotion type
                 if (moodMarker.value.emotionType == EmotionType.Angry) {
                     Text("\uD83D\uDE21", fontSize = 18.em)
                 } else if (moodMarker.value.emotionType == EmotionType.Sad) {
@@ -118,6 +119,8 @@ fun MoodCard(
                 } else {
                     Text("\uD83D\uDE01", fontSize = 18.em)
                 }
+                //Display the favorite icon based on the favorite status
+                //If moodMarker is favorite show a filled in heart icon
                 if (moodMarker.value.isFavorite){
                     Icon(
                         Icons.Default.Favorite,
@@ -130,21 +133,22 @@ fun MoodCard(
                         tint = MaterialTheme.colorScheme.primary)
                 } else {
                     Icon(
-                        Icons.Outlined.FavoriteBorder,
+                        Icons.Outlined.FavoriteBorder,      //if not favorite show an outlined heart shape
                         "Not Favorite",
                         modifier = Modifier
                             .clickable {
-                                moodMarker.value = moodMarker.value.copy(isFavorite = true)
+                                moodMarker.value = moodMarker.value.copy(isFavorite = true)  //Toggle favorite status
                             }
                             .size(40.dp),
                         tint = MaterialTheme.colorScheme.primary)
                 }
+                //Image icon button when clicked it will open the the photo gallery
                 Icon(
                     Icons.Default.AccountBox,
                     "Add Image",
                     modifier = Modifier
                         .clickable {
-                            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+                            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) // Launch image Picker
                         }
                         .size(40.dp),
                     tint = MaterialTheme.colorScheme.primary
@@ -159,38 +163,50 @@ fun MoodCard(
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxWidth()
             ) {
+                //Display the emojis in a smaller size
                 Text("\uD83D\uDE21", fontSize = 8.em)
                 Text("\uD83D\uDE41", fontSize = 8.em)
                 Text("\uD83D\uDE10", fontSize = 8.em)
                 Text("\uD83D\uDE42", fontSize = 8.em)
                 Text("\uD83D\uDE01", fontSize = 8.em)
             }
+            //Row of RadioButtons for selecting different emotions
             Row(
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxWidth()
             ) {
+                //Radio Button for the Angry emotion
                 RadioButton(selected = moodMarker.value.emotionType == EmotionType.Angry,
                     onClick = {
+                        //When clicked set the emotion type to angry
                         moodMarker.value = moodMarker.value.copy(emotionType = EmotionType.Angry)
                     }
                 )
+                //Radio Button for the Sad emotion
                 RadioButton(selected = moodMarker.value.emotionType == EmotionType.Sad,
                     onClick = {
+                        //When clicked set the emotion type to sad
                         moodMarker.value = moodMarker.value.copy(emotionType = EmotionType.Sad)
                     }
                 )
+                //Radio Button for the Neutral emotion
                 RadioButton(selected = moodMarker.value.emotionType == EmotionType.Neutral,
                     onClick = {
+                        //When clicked set the emotion type to neutral
                         moodMarker.value = moodMarker.value.copy(emotionType = EmotionType.Neutral)
                     }
                 )
+                //Radio Button for the Happy emotion
                 RadioButton(selected = moodMarker.value.emotionType == EmotionType.Happy,
                     onClick = {
+                        //When clicked set the emotion type to happy
                         moodMarker.value = moodMarker.value.copy(emotionType = EmotionType.Happy)
                     }
                 )
+                //Radio Button for the Excited emotion
                 RadioButton(selected = moodMarker.value.emotionType == EmotionType.Excited,
                     onClick = {
+                        //When clicked set the emotion type to excited
                         moodMarker.value = moodMarker.value.copy(emotionType = EmotionType.Excited)
                     }
                 )
@@ -202,10 +218,11 @@ fun MoodCard(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
+                    //TextField for writing the daily entry
                     TextField(
-                        value = moodMarker.value.dailyEntry,
+                        value = moodMarker.value.dailyEntry, // Set the value of TextField to daily entry text
                         onValueChange = {
-                            moodMarker.value = moodMarker.value.copy(dailyEntry = it)
+                            moodMarker.value = moodMarker.value.copy(dailyEntry = it) /// Update daily entry text when changed
                         },
                         label = { Text("Enter your MoodMarker") }
                     )
@@ -232,17 +249,17 @@ fun MoodCard(
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
                     Button(onClick = {
-                        if (isEdit()){
-                            vm.updateMoodMarker(moodMarker.value)
-                            onEdit()
+                        if (isEdit()){ //Check if it is in edit mode
+                            vm.updateMoodMarker(moodMarker.value) // Update the mood marker in the view model
+                            onEdit()   //Trigger the edit action
                             vm.setPresetMoodMarker(MoodMarker(0, EmotionType.Happy, "", false, Date().toString()))
                         } else {
-                            vm.addMoodMarker(moodMarker.value)
+                            vm.addMoodMarker(moodMarker.value) //add mood marker to the view model
                         }
 
                         // Display notification with the submission confirmation
                         vm.displayNotification()
-
+                        //Takes user back to the home page
                         nav.popBackStack()
                     })
                     {
@@ -256,6 +273,7 @@ fun MoodCard(
     }
 }
 
+//Enum represents different types of emotions
 enum class EmotionType {
     Angry, Sad, Neutral, Happy, Excited
 }

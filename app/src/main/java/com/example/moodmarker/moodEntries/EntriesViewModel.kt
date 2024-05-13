@@ -128,7 +128,6 @@ class EntriesViewModel(app: Application): AndroidViewModel(app) {
                     Manifest.permission.POST_NOTIFICATIONS
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
-                // TODO: Consider handling the case where the user hasn't granted the permission.
                 return
             }
             notify(0, builder.build())
@@ -138,8 +137,7 @@ class EntriesViewModel(app: Application): AndroidViewModel(app) {
 
     // Add a method to create the notification channel
     private fun createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is not in the Support Library.
+        // Create the NotificationChannel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = "Submission"
             val descriptionText = "Channel for confirming submission of a daily mood marker"
