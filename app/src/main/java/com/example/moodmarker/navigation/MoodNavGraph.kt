@@ -27,14 +27,11 @@ import com.example.moodmarker.moodEntries.EntriesViewModel
 import com.example.moodmarker.moodEntries.MarkMyMood
 import com.example.moodmarker.moodEntries.MoodCard
 
+/** Navigation for the app. Creates the viewmodels and passes needed data to screen components -Ben **/
 @Composable
 fun MoodNavGraph(navController: NavHostController = rememberNavController(), paddingValues: PaddingValues) {
     val vm: EntriesViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
     val vmAccounts: AccountsViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
-//    val vmL: LoginViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
-//    val vmCA: CreateAccountViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
-//    val vmP: ProfileViewModel = viewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity)
-
     var enteredUsername = rememberSaveable { mutableStateOf("") }
     val users by vmAccounts.userList
 
@@ -117,10 +114,6 @@ fun MoodNavGraph(navController: NavHostController = rememberNavController(), pad
                 enteredUser = vmAccounts.getEnteredUser()
                 )
 
-        }
-
-        composable(Routes.AppSettings.route){
-            /* TODO: Settings */
         }
 
         composable(Routes.ChangePassword.route){

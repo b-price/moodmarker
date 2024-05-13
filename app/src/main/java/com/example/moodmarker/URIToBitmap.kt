@@ -10,10 +10,8 @@ import android.os.Build
 
 /**
  * Converts a URI to a Bitmap using the provided [context] and [uri].
- *
- * @param context The context used to access the content resolver.
- * @param uri The URI of the image to be converted to a Bitmap.
- * @return The Bitmap representation of the image, or null if conversion fails.
+ * -Ben
+
  */
 fun uriToBitmap(context: Context, uri: Uri): Bitmap? {
     // Obtain the content resolver from the context

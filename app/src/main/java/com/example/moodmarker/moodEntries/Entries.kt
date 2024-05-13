@@ -14,6 +14,11 @@ import com.example.moodmarker.db.entities.MoodMarker
 import kotlin.reflect.KFunction0
 import kotlin.reflect.KFunction1
 
+
+/** The list of moodmarkers, implemented in a LazyColumn.
+ * This is used for the entries and favorites pages
+ * -Ben
+ * **/
 @Composable
 fun Entries(
     entries: List<MoodMarker>,
@@ -32,7 +37,6 @@ fun Entries(
             ConfirmDialog(onDelete = onDelete, onDismiss = dismissDialog )
         }
         Column {
-            //SearchBar(onFilter = onFilter)
             val content: @Composable () -> Unit = {
                 LazyColumn{
                     items(entriesRev) { entry ->
@@ -45,6 +49,7 @@ fun Entries(
     }
 }
 
+/** Dialog popup for confirming MoodMarker deletion -Ben**/
 @Composable
 fun ConfirmDialog(
     onDelete: () -> Unit,

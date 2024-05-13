@@ -50,14 +50,14 @@ fun MainScreen() {
         /** Shows bottom bar for all other screens **/
         else -> true
     }
-
+    /** Scaffolding for the top/bottom bars -Ben **/
     Scaffold (
         topBar = {TopBar()},
         bottomBar = {if(showBottomBar) {BottomBar(nav = nav, currentRoute)}}
     ){pv: PaddingValues ->
         MoodNavGraph(navController = nav, pv)
     }
-//TODO: Zen quotes after many sads/mads
+
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -87,11 +87,9 @@ private fun TopBar() {
     })
 }
 
-
+/** Bottom bar allows nav throughout the app -Ben**/
 @Composable
 private fun BottomBar(nav: NavHostController,currentRoute: String?) {
-//    val currentBackStack by nav.currentBackStackEntryAsState()
-//    val currentRoute: String? = currentBackStack?.destination?.route
     NavigationBar {
         NavigationBarItem(
             selected = currentRoute == Routes.MainPage.route,
