@@ -19,25 +19,27 @@ class QuotesFetcher (private val context: Context) : IQuoteFetcher {
     //Fetch quotes from the ZenQuotes api
     override suspend fun fetchQuotes(): List<String> {
         return withContext(Dispatchers.IO) {
+            //Build HTTP request ti fetch quotes
             val request = Request.Builder()
                 .get()
                 .url("https://zenquotes.io/api/quotes/")
                 .build()
-
+            //Execute the request synchronously
             val response = client.newCall(request).execute()
             val responseBody = response.body
             val quotes = mutableListOf<String>()
-
+            //Parse response to check if it is successful and contains a body
             if (responseBody != null && response.isSuccessful) {
+                //Parse JSON array that holds the quotes
                 val jsonArray = JSONArray(responseBody.string())
-
+                //Iterate through the JSON array to get the quotes
                 for (i in 0 until jsonArray.length()) {
                     val jsonObject = jsonArray.getJSONObject(i)
                     val quoteText = jsonObject.getString("q")
                     quotes.add(quoteText)
                 }
             }
-
+            //Return the list of quotes
             quotes
         }
     }
