@@ -44,11 +44,11 @@ interface UsersDao {
     suspend fun updateUser(user: User)
 
     /** Get User Info **/
-    @Query("SELECT 1 FROM users WHERE id LIKE :id")
+    @Query("SELECT * FROM users WHERE id LIKE :id")
     suspend fun getUserInfo(id:Int): User
 
     /** Get Login Info **/
-    @Query("SELECT 1 FROM users WHERE userName LIKE :userName AND password LIKE :password")
+    @Query("SELECT * FROM users WHERE userName LIKE :userName AND password LIKE :password")
     suspend fun getLoginInfo(userName: String, password: String): User
 
     @Query("SELECT EXISTS (SELECT 1 FROM users WHERE userName LIKE :userName)")
