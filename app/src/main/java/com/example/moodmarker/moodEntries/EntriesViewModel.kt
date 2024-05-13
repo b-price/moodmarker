@@ -1,11 +1,21 @@
 package com.example.moodmarker.moodEntries
 
+import android.Manifest
 import android.app.Application
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.moodmarker.R
 import com.example.moodmarker.db.IMoodMarkerRepository
 import com.example.moodmarker.db.MoodMarkerRepository
 import com.example.moodmarker.db.entities.MoodMarker
@@ -21,6 +31,7 @@ class EntriesViewModel(app: Application): AndroidViewModel(app) {
     private var _presetMoodMarker: MoodMarker
     private val _repository: IMoodMarkerRepository = MoodMarkerRepository(getApplication())
     private var _isEdit: Boolean = false
+    val CHANNEL_ID = "submission_channel"
 
     init {
         viewModelScope.launch {
@@ -95,5 +106,51 @@ class EntriesViewModel(app: Application): AndroidViewModel(app) {
 
     fun getIsEdit(): Boolean {
         return _isEdit
+    }
+
+    fun displayNotification() {
+        // Create a notification channel
+        createNotificationChannel()
+
+        // Build the notification
+        val builder = NotificationCompat.Builder(getApplication(), CHANNEL_ID)
+            .setSmallIcon(R.drawable.notification_icon)
+            .setContentTitle("Submission Confirmation")
+            .setContentText("You submitted your daily MoodMarker. See you tomorrow!")
+            .setStyle(NotificationCompat.BigTextStyle().bigText("You submitted your daily MoodMarker. See you tomorrow!"))
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+
+        // Display the notification
+        with(NotificationManagerCompat.from(getApplication())) {
+            val context = getApplication<Application>().applicationContext
+            if (ContextCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                // TODO: Consider handling the case where the user hasn't granted the permission.
+                return
+            }
+            notify(0, builder.build())
+        }
+    }
+
+
+    // Add a method to create the notification channel
+    private fun createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is not in the Support Library.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Submission"
+            val descriptionText = "Channel for confirming submission of a daily mood marker"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+                description = descriptionText
+            }
+            // Register the channel with the system.
+            val notificationManager: NotificationManager =
+                getApplication<Application>().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
     }
 }

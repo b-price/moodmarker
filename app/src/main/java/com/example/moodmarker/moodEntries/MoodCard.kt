@@ -41,8 +41,10 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.moodmarker.db.entities.MoodMarker
+import com.example.moodmarker.quotes.QuoteViewModel
 import com.example.moodmarker.uriToBitmap
 import java.util.Date
 import kotlin.reflect.KFunction0
@@ -55,6 +57,7 @@ fun MoodCard(
     isEdit: () -> Boolean,
     onEdit: KFunction0<Unit>
 ) {
+    val quoteVm: QuoteViewModel = viewModel()
     val moodMarker = remember { mutableStateOf(presetMood) }
     // Retrieve the current context using LocalContext.current
     val context = LocalContext.current
@@ -236,6 +239,10 @@ fun MoodCard(
                         } else {
                             vm.addMoodMarker(moodMarker.value)
                         }
+
+                        // Display notification with the submission confirmation
+                        vm.displayNotification()
+
                         nav.popBackStack()
                     })
                     {

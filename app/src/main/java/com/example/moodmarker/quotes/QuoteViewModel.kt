@@ -1,12 +1,23 @@
 package com.example.moodmarker.quotes
 
+import android.Manifest
 import android.app.Application
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
 import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.moodmarker.R
 import kotlinx.coroutines.launch
 
 class QuoteViewModel(app: Application) : AndroidViewModel(app) {
@@ -19,7 +30,7 @@ class QuoteViewModel(app: Application) : AndroidViewModel(app) {
         fetchQuote()
     }
 
-    private fun fetchQuote() {
+    fun fetchQuote() {
         viewModelScope.launch {
             try {
                 val fetchedQuotes = quotesFetcher.fetchQuotes()
@@ -30,4 +41,6 @@ class QuoteViewModel(app: Application) : AndroidViewModel(app) {
             }
         }
     }
+
 }
+

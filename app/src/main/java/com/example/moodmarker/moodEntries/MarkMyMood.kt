@@ -10,6 +10,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -25,6 +29,7 @@ import java.util.Date
 @Composable
 fun MarkMyMood(nav: NavHostController, onPickMood: (MoodMarker) -> Unit) {
     val vm: QuoteViewModel = viewModel()
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -70,10 +75,11 @@ fun MarkMyMood(nav: NavHostController, onPickMood: (MoodMarker) -> Unit) {
             Spacer(modifier = Modifier.height(100.dp))
         }
         Text(
-            text = vm.quote.value?: "Loading quote...",
+            text = vm.quote.value ?: "Loading quote...",
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth()
         )
+
 
     }
 }
