@@ -78,6 +78,7 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation ("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("androidx.compose.ui:ui-text-google-fonts:1.6.7")
     val room_version = "2.6.1"
 
     implementation("androidx.room:room-runtime:$room_version")
