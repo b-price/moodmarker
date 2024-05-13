@@ -1,7 +1,7 @@
 package com.example.moodmarker.ui.theme
 import androidx.compose.ui.graphics.Color
 
-val primaryLight = Color(0xFF6C5E0F)
+val primaryLight = Color(0xFFC7B448)
 val onPrimaryLight = Color(0xFFFFFFFF)
 val primaryContainerLight = Color(0xFFF7E388)
 val onPrimaryContainerLight = Color(0xFF211B00)
