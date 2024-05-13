@@ -37,21 +37,23 @@ import com.example.moodmarker.navigation.Routes
 @Composable
 fun MainScreen() {
     val nav = rememberNavController()
+    val currentBackStack by nav.currentBackStackEntryAsState()
+    val currentRoute: String? = currentBackStack?.destination?.route
 
+    /** Toggle for bottom bar based on the screen the user has navigated to**/
     var showBottomBar by rememberSaveable { mutableStateOf(true) }
-    val navBackStackEntry by nav.currentBackStackEntryAsState()
-
-    /** Toggle for bottom bar **/
-    showBottomBar = when (navBackStackEntry?.destination?.route) {
+    showBottomBar = when (currentRoute) {
+        /** Doesn't show bottom bar for these screens listed **/
         "loginPage" -> false
         "createAccount" -> false
         "changePassword" -> false
+        /** Shows bottom bar for all other screens **/
         else -> true
     }
 
     Scaffold (
         topBar = {TopBar()},
-        bottomBar = {if(showBottomBar) BottomBar(nav = nav)}
+        bottomBar = {if(showBottomBar) {BottomBar(nav = nav, currentRoute)}}
     ){pv: PaddingValues ->
         MoodNavGraph(navController = nav, pv)
     }
@@ -62,16 +64,14 @@ fun MainScreen() {
 @Composable
 private fun TopBar() {
 
-    val emojiList = listOf("😁", "😡", "🙁", "🙂", "😐")
+    /** Displays the name of our app at the top of the screen with two random emojis
+     *          for the oo's every time the app is started
+     */
+    val emojiList = listOf("😁", "🥰", "😄", "🙂", "😊", "😉", "😂", "😍" )
+    // 😡 🙁
     val randomEmojiOne = emojiList.shuffled().take(1)[0]
     val randomEmojiTwo = emojiList.shuffled().take(1)[0]
-
     TopAppBar(title = {
-//        Text(
-//            "MoodMarker",
-//            fontSize = 9.em,
-//            fontWeight = FontWeight.Bold
-//        )
         Row(modifier = Modifier
             .fillMaxWidth()
             .padding(start = 6.dp, end = 6.dp),
@@ -87,10 +87,11 @@ private fun TopBar() {
     })
 }
 
+
 @Composable
-private fun BottomBar(nav: NavHostController) {
-    val currentBackStack by nav.currentBackStackEntryAsState()
-    val currentRoute: String? = currentBackStack?.destination?.route
+private fun BottomBar(nav: NavHostController,currentRoute: String?) {
+//    val currentBackStack by nav.currentBackStackEntryAsState()
+//    val currentRoute: String? = currentBackStack?.destination?.route
     NavigationBar {
         NavigationBarItem(
             selected = currentRoute == Routes.MainPage.route,

@@ -15,6 +15,10 @@ import androidx.compose.ui.unit.em
 import androidx.navigation.NavHostController
 import com.example.moodmarker.navigation.Routes
 
+/** Settings screen
+ * Current version doesn't logout user from database, just redirects to login screen
+ * Also the App settings screen doesn't currently exist
+ */
 @Composable
 fun Settings(nav: NavHostController) {
 
@@ -25,18 +29,23 @@ fun Settings(nav: NavHostController) {
             Spacer(modifier = Modifier.height(75.dp))
         }
 
+        /** Button to navigate to profile screen **/
         Row (modifier = Modifier.padding(50.dp), verticalAlignment = Alignment.CenterVertically){
             Button(onClick = { nav.navigate(Routes.ProfilePage.route) }) {
                 Text("Profile Settings", fontSize = 7.em, modifier = Modifier.padding(10.dp))
             }
         }
 
+        //TODO Create App Settings Screen
+        /** Button to navigate to app settings screen **/
 //        Row (modifier = Modifier.padding(50.dp), verticalAlignment = Alignment.CenterVertically){
 //            Button(onClick = { nav.navigate(Routes.AppSettings.route) }) {
 //                Text("App Settings", fontSize = 7.em, modifier = Modifier.padding(10.dp))
 //            }
 //        }
 
+        //TODO Fix logout w/ database
+        /** Button to navigate to login screen **/
         Row (modifier = Modifier.padding(50.dp), verticalAlignment = Alignment.CenterVertically){
             Button(onClick = { nav.navigate(Routes.LoginPage.route) }) {
                 Text("Logout", fontSize = 7.em, modifier = Modifier.padding(10.dp))

@@ -46,6 +46,9 @@ import com.example.moodmarker.navigation.Routes
 import com.example.moodmarker.ui.theme.components.LoginFields
 import kotlin.reflect.KSuspendFunction1
 
+/** Create Account screen
+ * Current version does add user to databse, but doesn't verify whether username exists or not
+ */
 @Composable
 fun CreateAccount(
     users: List<User>,
@@ -65,6 +68,8 @@ fun CreateAccount(
 
     var arePasswordsSame by remember { mutableStateOf(false) }
     var userNameExists by remember { mutableStateOf(false) }
+
+    /** Checks for allowing login navigation based on whether all fields are filled or not **/
     val areFieldsEmpty = firstName.isNotEmpty() && password.isNotEmpty() && lastName.isNotEmpty() && confirmPassword.isNotEmpty() && email.isNotEmpty() && userName.isNotEmpty()
 
     Column(
@@ -74,10 +79,12 @@ fun CreateAccount(
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        /** Shows a red notification at the top of the screen if the entered password does not match confirm password entered **/
         AnimatedVisibility(arePasswordsSame) {
             Text("Passwords Are Not the Same", color = MaterialTheme.colorScheme.error)
         }
 
+        /** Shows a red notification at the top of the screen if the entered username does not match the one stored **/
         AnimatedVisibility(userNameExists) {
             Text("Username Already Exists", color = MaterialTheme.colorScheme.error)
         }
@@ -134,7 +141,7 @@ fun CreateAccount(
         Spacer(Modifier.height(8.dp))
 
 
-        /** Password Create Account Field **/
+        /** Password Create Account Field with password visual transformation keyboard **/
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = password,
@@ -145,6 +152,7 @@ fun CreateAccount(
             visualTransformation = if (passwordVisibility) { VisualTransformation.None } else { PasswordVisualTransformation() },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             trailingIcon = {
+                /** checks whether the user has clicked the show password characters or chosen to show . in their place **/
                 if (passwordVisibility) {
                     IconButton(onClick = { passwordVisibility = false }) {
                         Icon(imageVector = Icons.Filled.Visibility, contentDescription = "") }
@@ -157,7 +165,7 @@ fun CreateAccount(
         Spacer(Modifier.height(10.dp))
 
 
-        /** Confirm Password Create Account Field **/
+        /** Confirm Password Create Account Field with password visual transformation keyboard **/
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = confirmPassword,
@@ -168,6 +176,7 @@ fun CreateAccount(
             visualTransformation = if (confirmPasswordVisibility) { VisualTransformation.None } else { PasswordVisualTransformation() },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             trailingIcon = {
+                /** checks whether the user has clicked the show password characters or chosen to show . in their place **/
                 if (confirmPasswordVisibility) {
                     IconButton(onClick = { confirmPasswordVisibility = false }) {
                         Icon(imageVector = Icons.Filled.Visibility, contentDescription = "") }
@@ -181,13 +190,17 @@ fun CreateAccount(
         Spacer(Modifier.height(20.dp))
 
 
-        /** Submit Button **/
+        /** Submit Button to take user to login screen if field verification is successful**/
         Button(onClick = {
             arePasswordsSame = password != confirmPassword
             /** TODO Fix Signup Verification **/
 //            val a = vmAccounts.userExists(userName)
 
 //            userNameExists = users.any{ it.userName == user.value.userName }
+            /** Current verification doesn't work with database, but checks to see if the current user
+             * for this current start up of the app has entered information into all the fields
+             * and updates their values stored in state
+             */
             if(!arePasswordsSame) {
                 enteredUser.firstName = firstName
                 enteredUser.lastName = lastName
@@ -195,9 +208,13 @@ fun CreateAccount(
                 enteredUser.userName = userName
                 enteredUser.email = email
 
+                // Currently does add the user to the database
                 vmAccounts.addUser(enteredUser)
-                nav.popBackStack()
-//                nav.navigate(Routes.MainPage.route)
+
+                // Navigate to the previous page
+//               nav.popBackStack()
+                // Navigate to login page
+                nav.navigate(Routes.LoginPage.route)
             }
             }, modifier = Modifier.fillMaxWidth(), enabled = areFieldsEmpty ) {
             Text("Submit", fontSize = 5.em)

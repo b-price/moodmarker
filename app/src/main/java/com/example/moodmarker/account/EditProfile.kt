@@ -34,6 +34,9 @@ import com.example.moodmarker.db.entities.User
 import com.example.moodmarker.navigation.Routes
 import com.example.moodmarker.ui.theme.components.LoginFields
 
+/** Edit Profile screen
+ * Current version doesn't update user with database, just with current state
+ */
 @Composable
 fun EditProfile(
     users: List<User>,
@@ -50,6 +53,8 @@ fun EditProfile(
 
     var arePasswordsSame by remember { mutableStateOf(false) }
     var userNameExists by remember { mutableStateOf(false) }
+
+    /** Checks for allowing login navigation based on whether all fields are filled or not **/
     val areFieldsEmpty = firstName.isNotEmpty() && lastName.isNotEmpty() && email.isNotEmpty() && userName.isNotEmpty()
 
     Column(
@@ -111,14 +116,19 @@ fun EditProfile(
         Spacer(Modifier.height(2.dp))
 
 
-        /** Submit Button **/
+        //TODO Fix Update User Information w/ Database
+        /** Submit Button navigate to back to previous page and update state values of the current user**/
         Button(onClick = {
+            //Change state values of current user
             enteredUser.firstName = firstName
             enteredUser.lastName = lastName
             enteredUser.userName = userName
             enteredUser.email = email
 
+            // Not currently working with database
             vmAccounts.updateUser(enteredUser)
+
+            //Navigate to previous page
             nav.popBackStack()
 
         }, modifier = Modifier.fillMaxWidth(), enabled = areFieldsEmpty ) {
@@ -126,7 +136,7 @@ fun EditProfile(
         }
         Spacer(modifier = Modifier.height(20.dp))
 
-
+        /** Cancel Text Button to navigate to login screen if user doesn't want to edit their profile information **/
         Row(horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
@@ -134,6 +144,7 @@ fun EditProfile(
                 .wrapContentSize(align = Alignment.BottomCenter)
         ) {
             Spacer(Modifier.height(8.dp))
+
             TextButton(onClick = { nav.popBackStack()}) {
                 Text("Cancel")
             }

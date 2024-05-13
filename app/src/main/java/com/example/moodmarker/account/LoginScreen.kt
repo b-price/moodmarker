@@ -47,7 +47,9 @@ import com.example.moodmarker.navigation.Routes
 import com.example.moodmarker.ui.theme.components.LoginFields
 
 
-
+/** Login screen
+ * Current version doesn't verify user with database, just with current state
+ */
 @Composable
 fun LoginPage(
     users: List<User>,
@@ -58,13 +60,12 @@ fun LoginPage(
 ) {
     val (userName, setUserName) = rememberSaveable { mutableStateOf("") }
     val (password, setPassword) = rememberSaveable { mutableStateOf("") }
-    val (rememberMe, setRememberMe) = rememberSaveable { mutableStateOf(false) }
 
     var passwordVisibility by remember { mutableStateOf(false) }
-    var confirmPasswordVisibility by remember { mutableStateOf(false) }
-
     var correctPassword by remember { mutableStateOf(false) }
     var userNameExists by remember { mutableStateOf(false) }
+
+    /** Checks for allowing login navigation based on whether all fields are filled or not **/
     val areFieldsEmpty = userName.isNotEmpty() && password.isNotEmpty()
 
     Column(
@@ -73,10 +74,12 @@ fun LoginPage(
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        /** Shows a red notification at the top of the screen if the entered password does not match the one stored **/
         AnimatedVisibility(correctPassword) {
             Text("That password is incorrect", color = MaterialTheme.colorScheme.error)
         }
 
+        /** Shows a red notification at the top of the screen if the entered username does not match the one stored **/
         AnimatedVisibility(userNameExists) {
             Text("That username does not exist", color = MaterialTheme.colorScheme.error)
         }
@@ -104,7 +107,7 @@ fun LoginPage(
         Spacer(modifier = Modifier.height(10.dp))
 
 
-        /** Password Login Field **/
+        /** Password Login Field with password visual transformation keyboard **/
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = password,
@@ -115,6 +118,7 @@ fun LoginPage(
             visualTransformation = if (passwordVisibility) { VisualTransformation.None } else { PasswordVisualTransformation() },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             trailingIcon = {
+                /** checks whether the user has clicked the show password characters or chosen to show . in their place **/
                 if (passwordVisibility) {
                     IconButton(onClick = { passwordVisibility = false }) {
                         Icon(imageVector = Icons.Filled.Visibility, contentDescription = "") }
@@ -127,7 +131,9 @@ fun LoginPage(
         Spacer(modifier = Modifier.height(10.dp))
 
 
-        /** Remember Me Checkbox **/
+        //TODO Set up Remember Me Checkbox
+        /** Remember Me Checkbox to remember the user's username is checked**/
+/**
         Row (
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
@@ -136,17 +142,24 @@ fun LoginPage(
             Text("Remember Me")
         }
         Spacer(modifier = Modifier.height(10.dp))
+**/
 
 
-        /** Login Button **/
+        /** Login Button to take user to main screen if login verification is successful **/
         Button(
             onClick = {
                 /** TODO Fix Login Verification credentials w/ Database **/
+                /** Current verification doesn't work with database, but checks to see if the current user
+                 * for this current start up of the app has created a password and that password entered matches,
+                 * as well as a username and that username entered matches the one stored in state
+                 */
                 correctPassword = password != enteredUser.password
                 userNameExists = (enteredUser.userName == "" || userName != enteredUser.userName)
                 if(!userNameExists && !correctPassword){
                     nav.navigate("mainPage")
                 }
+
+
             },
             modifier = Modifier.fillMaxWidth(),
             enabled = areFieldsEmpty ) {
@@ -155,7 +168,7 @@ fun LoginPage(
         Spacer(modifier = Modifier.height(10.dp))
 
 
-        /** Forgot Password Button **/
+        /** Forgot Password Button to navigate to change password screen **/
         TextButton(onClick = {
             nav.navigate("changePassword")}
         ) {
@@ -164,7 +177,7 @@ fun LoginPage(
         Spacer(modifier = Modifier.height(10.dp))
 
 
-        /** Signup Button **/
+        /** Signup Button to navigate to create account screen **/
         Row(horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
@@ -180,14 +193,3 @@ fun LoginPage(
     }
 
 }
-
-
-//        /** Login and Signup Buttons **/
-//        Row (modifier = Modifier.padding(50.dp), verticalAlignment = Alignment.CenterVertically){
-//            Button(onClick = { nav.navigate(Routes.MainPage.route) }, modifier = Modifier.padding(10.dp) ) {
-//                Text("Login", fontSize = 5.em, modifier = Modifier.padding(5.dp))
-//            }
-//            Button(onClick = { nav.navigate(Routes.CreateAccount.route) }) {
-//                Text("Signup", fontSize = 5.em, modifier = Modifier.padding(5.dp))
-//            }
-//        }

@@ -32,7 +32,9 @@ import com.example.moodmarker.db.entities.User
 import com.example.moodmarker.navigation.Routes
 
 
-
+/** Profile Page screen
+ * Current version doesn't delete user from database, just redirects to login screen
+ */
 @Composable
 fun ProfilePage(
     users: List<User>,
@@ -48,15 +50,14 @@ fun ProfilePage(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
+        /** Profile Screen Header Text showing current user's username**/
         Row(){
-            /** Profile Screen Header Text **/
             Text(
                 text = enteredUser.userName,
                 style = MaterialTheme.typography.displayMedium,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier
                     .padding(vertical = 16.dp)
-//                    .align(alignment = Alignment.Start)
                 //color = Color.
             )
 
@@ -73,6 +74,7 @@ fun ProfilePage(
         Spacer(modifier = Modifier.height(2.dp))
 
 
+        /** Text showing current user's first name **/
         Row(modifier =
             Modifier.padding(vertical = 16.dp)
                    .align(alignment = Alignment.Start)){
@@ -87,12 +89,11 @@ fun ProfilePage(
                 //color = Color.
             )
         }
-
         Spacer(modifier = Modifier.height(2.dp))
 
-
+        /** Text showing current user's last name **/
         Row(modifier =
-        Modifier.padding(vertical = 16.dp)
+            Modifier.padding(vertical = 16.dp)
             .align(alignment = Alignment.Start)){
             Text(
                 text = "Last Name: ",
@@ -110,8 +111,9 @@ fun ProfilePage(
         Spacer(modifier = Modifier.height(2.dp))
 
 
+        /** Text showing current user's username **/
         Row(modifier =
-        Modifier.padding(vertical = 16.dp)
+            Modifier.padding(vertical = 16.dp)
             .align(alignment = Alignment.Start)){
             Text(
                 text = "Username: ",
@@ -128,8 +130,9 @@ fun ProfilePage(
         Spacer(modifier = Modifier.height(2.dp))
 
 
+        /** Text showing current user's email **/
         Row(modifier =
-        Modifier.padding(vertical = 16.dp)
+            Modifier.padding(vertical = 16.dp)
             .align(alignment = Alignment.Start)){
             Text(
                 text = "Email: ",
@@ -146,6 +149,7 @@ fun ProfilePage(
         Spacer(Modifier.height(20.dp))
 
 
+        /** Edit Profile Information Button to take user to edit profile screen **/
         Button(
             onClick = {
                 nav.navigate("editProfile")
@@ -155,6 +159,8 @@ fun ProfilePage(
         }
         Spacer(modifier = Modifier.height(20.dp))
 
+
+        /** Change Password Button to take user to change password screen**/
         Button(
             onClick = {
                 nav.navigate("changePassword")
@@ -164,6 +170,8 @@ fun ProfilePage(
         }
 
 
+        //TODO Fix Delete Account w/ Database
+        /** Delete Account Text Button to take the user to login screen **/
         Row(horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
