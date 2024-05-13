@@ -11,6 +11,7 @@ import com.example.moodmarker.db.MoodMarkerRepository
 import com.example.moodmarker.db.entities.User
 import kotlinx.coroutines.launch
 
+/** Viewmodel for profile screen - Not currently in use **/
 class ProfileViewModel(app: Application): AndroidViewModel(app) {
     private val _userList: MutableState<List<User>> = mutableStateOf(listOf())
     val userList: State<List<User>> = _userList

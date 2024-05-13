@@ -16,6 +16,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 
 
+/** Starter Text Field Function for many of the modifiable text fields across the application's account screens **/
 @Composable
 fun LoginFields(
     modifier: Modifier = Modifier,

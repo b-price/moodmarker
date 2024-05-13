@@ -7,6 +7,7 @@ import java.util.UUID
 
 //import java.sql.Time
 
+/** Database entity for user accounts and sets table name to be called users **/
 @Entity(tableName = "users")
 data class User(
     @PrimaryKey(autoGenerate = true)

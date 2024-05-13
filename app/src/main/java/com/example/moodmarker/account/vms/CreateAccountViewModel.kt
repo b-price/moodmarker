@@ -14,6 +14,7 @@ import com.example.moodmarker.moodEntries.EmotionType
 import kotlinx.coroutines.launch
 import java.util.Date
 
+/** Viewmodel for create account screen - Not currently in use **/
 class CreateAccountViewModel(app: Application): AndroidViewModel(app) {
     private val _userList: MutableState<List<User>> = mutableStateOf(listOf())
     val userList: State<List<User>> = _userList

@@ -6,9 +6,10 @@ import androidx.room.Update
 import com.example.moodmarker.db.entities.MoodMarker
 import com.example.moodmarker.db.entities.User
 
+/** Interface for Mood Marker Repository **/
 interface IMoodMarkerRepository {
 
-    /** MoodMarkers **/
+    /** MoodMarkers functions **/
     suspend fun getMoodMarkers() : List<MoodMarker>
 
     suspend fun deleteMoodMarker(moodMarker: MoodMarker)
@@ -18,7 +19,7 @@ interface IMoodMarkerRepository {
     suspend fun updateMoodMarker(moodMarker: MoodMarker)
 
 
-    /** Users **/
+    /** Users functions **/
     suspend fun getUsers() : List<User>
 
     suspend fun addUser(user: User)

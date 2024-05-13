@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.example.moodmarker.db.entities.MoodMarker
 import com.example.moodmarker.db.entities.User
 
+/** Repository for interacting with database **/
 class MoodMarkerRepository(app: Application) : IMoodMarkerRepository {
     private val db: MoodMarkersDatabase
     init {
@@ -13,7 +14,7 @@ class MoodMarkerRepository(app: Application) : IMoodMarkerRepository {
             .build()
     }
 
-    /** MoodMarkers **/
+    /** MoodMarkers functions **/
     override suspend fun getMoodMarkers(): List<MoodMarker> {
         return db.moodMarkersDao().getMoodMarkers()
     }
@@ -31,7 +32,7 @@ class MoodMarkerRepository(app: Application) : IMoodMarkerRepository {
     }
 
 
-    /** Users **/
+    /** Users functions **/
     override suspend fun getUsers(): List<User> {
         return db.usersDao().getUsers()
     }

@@ -14,6 +14,7 @@ import com.example.moodmarker.moodEntries.EmotionType
 import kotlinx.coroutines.launch
 import java.util.Date
 
+/** Viewmodel for settings screen - Not currently in use **/
 class SettingsViewModel{
 
 

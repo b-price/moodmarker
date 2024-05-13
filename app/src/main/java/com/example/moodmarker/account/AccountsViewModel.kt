@@ -16,6 +16,7 @@ import com.example.moodmarker.moodEntries.EmotionType
 import kotlinx.coroutines.launch
 import java.util.Date
 
+/** Viewmodel for all user account screens - Not all functions currently in use and or working **/
 class AccountsViewModel(app: Application): AndroidViewModel(app) {
     private val _userList: MutableState<List<User>> = mutableStateOf(listOf())
     val userList: State<List<User>> = _userList
@@ -132,13 +133,3 @@ class AccountsViewModel(app: Application): AndroidViewModel(app) {
         return _enteredUser
     }
 }
-
-
-
-//class AccountsViewModel : ViewModel() {
-//    private val _userList: MutableState<List<User>> = mutableStateOf(listOf())
-//    val userList: State<List<User>> = _userList
-//
-//
-//
-//}

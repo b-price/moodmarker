@@ -27,21 +27,28 @@ interface MoodMarkersDao {
 /** Users Dao **/
 @Dao
 interface UsersDao {
+    /** Get List of Users in database **/
     @Query("SELECT * FROM users")
     suspend fun getUsers(): List<User>
+
+    /** Add user to database **/
     @Insert
     suspend fun addUser(user: User)
+
+    /** Delete user from database **/
     @Delete
     suspend fun deleteUser(user: User)
+
+    /** Update user in database **/
     @Update
     suspend fun updateUser(user: User)
 
     /** Get User Info **/
-    @Query("SELECT * FROM users WHERE id LIKE :id")
+    @Query("SELECT 1 FROM users WHERE id LIKE :id")
     suspend fun getUserInfo(id:Int): User
 
     /** Get Login Info **/
-    @Query("SELECT * FROM users WHERE userName LIKE :userName AND password LIKE :password")
+    @Query("SELECT 1 FROM users WHERE userName LIKE :userName AND password LIKE :password")
     suspend fun getLoginInfo(userName: String, password: String): User
 
     @Query("SELECT EXISTS (SELECT 1 FROM users WHERE userName LIKE :userName)")

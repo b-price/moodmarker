@@ -53,10 +53,6 @@ fun Settings(nav: NavHostController) {
         }
 
     }
-
-
-
-
     Row {
         Spacer(modifier = Modifier.height(100.dp))
     }
